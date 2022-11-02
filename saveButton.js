@@ -1,12 +1,20 @@
-class saveButton {
-    constructor() {
-        const saveButton = document.createElement('div');
-        saveButton.classList.add('saveButton');
-        const textInSaveButton = document.createTextNode('Test');
-        saveButton.appendChild(textInSaveButton);
-        document.body.appendChild(saveButton);
-    }
-}
+export class saveButton{
+  constructor() {
+    let saveMazeNav = document.createElement('button');
+    saveMazeNav.setAttribute('id', 'saveButton');
+    saveMazeNav.innerHTML = 'saveButton';
+    this.saveMazeNav = saveMazeNav;
 
-const realSaveButton = new saveButton();
-realSaveButton();
+    this.TestMethod();
+    
+    return saveMazeNav;
+  }
+
+  TestMethod() {
+    this.saveMazeNav.addEventListener('click', () => {
+      console.log('working')
+    })
+  }
+
+ 
+}
