@@ -1,4 +1,4 @@
-export class gravityNav {
+export class GravityNav {
   constructor() {
     let gravityButton = document.createElement('button');
     gravityButton.setAttribute('id', 'gravityButton');

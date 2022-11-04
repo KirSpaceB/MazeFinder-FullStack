@@ -1,4 +1,4 @@
-export class sortMazeButton1 {
+export class SortMazeButton {
   constructor() {
     let sortMazeButton1 = document.createElement('button');
     sortMazeButton1.setAttribute('id','sortMazeButton1');

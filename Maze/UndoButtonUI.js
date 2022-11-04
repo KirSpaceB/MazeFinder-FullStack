@@ -1,4 +1,4 @@
-export class undoButtonNav {
+export class UndoButton {
   constructor() {
     let undoNavButton = document.createElement('button');
     undoNavButton.setAttribute('id', 'undoNavButton');

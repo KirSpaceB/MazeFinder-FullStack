@@ -1,4 +1,4 @@
-export class loadMazeNav {
+export class LoadMazeNav {
   constructor() {
     let loadButton = document.createElement('button');
     loadButton.setAttribute('id', 'loadButton');

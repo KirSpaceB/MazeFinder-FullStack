@@ -1,38 +1,38 @@
-import { gravityNav } from "./gravityButton.js";
-import { loadMazeNav } from "./loadButton.js";
-import { saveButton } from "./saveButton.js";
-import { undoButtonNav } from "./undoButton.js";
-import {createGrid} from "./createGridButton.js";
-import { sortMazeButton1 } from "./sortMazeButton.js";
-import { solveMazeButton } from "./solveMazeButton.js";
+import { GravityNav } from "./GravityButtonUI.js";
+import { LoadMazeNav } from "./LoadButtonUI.js";
+import { SaveButton } from "./SaveButtonUI.js";
+import { UndoButton } from "./UndoButtonUI.js";
+import {CreateGrid} from "./CreateGridButtonUI.js";
+import { SortMazeButton } from "./SortMazeButtonUI.js";
+import { SolveMazeButton } from "./SolveMazeButtonUI.js";
 
 export class navbar {
   constructor(saveButtonReal,loadButton,undoButton,creategridInput,gravityButton,solveButton,sortButton) {
-    let newSaveButton = new saveButton();
+    let newSaveButton = new SaveButton();
     saveButtonReal = newSaveButton;
     this.saveButtonReal = saveButtonReal;
 
-    let newLoadButton = new loadMazeNav();
+    let newLoadButton = new LoadMazeNav();
     loadButton = newLoadButton;
     this.loadButton = loadButton;
 
-    let newgravityButton = new gravityNav();
+    let newgravityButton = new GravityNav();
     gravityButton = newgravityButton;
     this.gravityButton = gravityButton;
 
-    let newUndoButton = new undoButtonNav();
+    let newUndoButton = new UndoButton();
     undoButton = newUndoButton;
     this.undoButton = newUndoButton;
 
-    let newCreatGridInput = new createGrid();
+    let newCreatGridInput = new CreateGrid();
     creategridInput = newCreatGridInput;
     this.creategridInput = creategridInput;
     
-    let newSortMazeButton = new sortMazeButton1();
+    let newSortMazeButton = new SortMazeButton();
     sortButton = newSortMazeButton;
     this.sortButton = sortButton;
 
-    let newSolveMazeButton = new solveMazeButton();
+    let newSolveMazeButton = new SolveMazeButton();
     solveButton = newSolveMazeButton;
     this.solveButton = solveButton;
   }

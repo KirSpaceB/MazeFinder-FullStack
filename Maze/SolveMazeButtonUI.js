@@ -1,4 +1,4 @@
-export class solveMazeButton {
+export class SolveMazeButton {
   constructor() {
     let solveMazeButton = document.createElement('button');
     solveMazeButton.setAttribute('id', 'solveMazeButton');

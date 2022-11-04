@@ -1,16 +1,16 @@
-export class saveButton{
+export class SaveButton{ //PascalCase Test
   constructor() {
     let saveMazeNav = document.createElement('button');
     saveMazeNav.setAttribute('id', 'saveButton');
     saveMazeNav.innerHTML = 'saveButton';
     this.saveMazeNav = saveMazeNav;
 
-    this.TestMethod();
+    this.testMethod();
     
     return saveMazeNav;
   }
 
-  TestMethod() {
+  testMethod() {//camelCase functions
     this.saveMazeNav.addEventListener('click', () => {
       console.log('working')
     })
