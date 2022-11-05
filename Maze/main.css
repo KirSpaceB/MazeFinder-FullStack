@@ -11,9 +11,16 @@ body {
   height: 100px;
   background-color: rgb(170, 89, 89);
 }
-canvas {
-  border: 1px solid black;
+#gridForMaze {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  width: 500px;
+  height: 500px;
 }
+.mazeGrid {
+  border: 1px solid rgb(170, 170, 230);
+}
+
 #saveButton {
   width: 100px;
   height: 50px;

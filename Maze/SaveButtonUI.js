@@ -6,7 +6,6 @@ export class SaveButton{ //PascalCase Test
     this.saveMazeNav = saveMazeNav;
 
     this.testMethod();
-    
     return saveMazeNav;
   }
 

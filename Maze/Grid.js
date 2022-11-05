@@ -1,51 +1,74 @@
-
 export class Grid {
   constructor() {
-    console.log('test');
-    this.ctx;
-    this.canvasGrid();
-    this.animatingCanvasGrid();
-    this.styleCanvasGrid("500px")
+    this.gridForMaze();
+    this.Maze(16);
+    this.WallsForMaze();
   }
 
-  canvasGrid() {
-    let canvasForGrid = document.createElement('canvas');
-    canvasForGrid.setAttribute('id', 'canvasForGrid')
-    document.body.appendChild(canvasForGrid);
+  WallsForMaze() {
+    let createWalls = Array.from(document.getElementsByClassName('mazeGrid'));
+    console.log(typeof createWalls);
+
+    //logic error 
+    createWalls.forEach(element => {
+      let Goal = "Goal";
+      const random = Math.floor(Math.random() * 4)
+      if (random === 0) {
+        element.style.backgroundColor = "black"
+      } else if (random === 1 && random === 2 && random === 3) {
+        element.style.backgroundColor = "white";
+      } else if (Goal === "") {
+        element.style.backgroundColor = "red";
+      }
+      console.log(typeof element);
+    })
+
+    // nums.forEach((e) => {
+    //   console.log(typeof e);
+    //   if (random === 0) {
+    //     e.style.backgroundColor = "white";
+    //   } else if (random === 1) {
+    //     e.style.backgroundColor = "black";
+    //   } else {
+    //     return 'error'
+    //   }
+    // })
+
+    
+
+
+    // could use set timer to implmenet walls for maze
   }
 
-  styleCanvasGrid(gridSize) {
-    let styleForGrid = document.getElementById('canvasForGrid');
-    styleForGrid.style.width = gridSize;
-    styleForGrid.style.height = gridSize;
+  
 
-    return styleForGrid;
+  gridForMaze() {
+    let Grid = document.createElement('div');
+    Grid.setAttribute('id', 'gridForMaze');
+
+    document.body.appendChild(Grid);
+
+
+    this.Grid = Grid;
+  }
+
+  Maze(gridSize) {
+    let mazeGridNum = 0;
+    const rows = gridSize;
+    const cols = gridSize;
+    const area = rows * cols;
+
+
+    for (let i = 0; i < area; i++) {
+      this.mazeGrid = document.createElement('div');
+      this.mazeGrid.setAttribute('class', `mazeGrid +${mazeGridNum += 1}`);
+      this.mazeGrid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
+      this.mazeGrid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
+
+
+      this.Grid.appendChild(this.mazeGrid);
+    }
+
   }
   
-  animatingCanvasGrid() {
-    let canvas = document.querySelector('canvas');
-
-    let ctx = canvas.getContext('2d');
-    
-    let x = 0;
-    let xVelocity = 1;
-    let y = 0;
-    let yVelocity = 1;
-    function animate() {
-      requestAnimationFrame(animate);
-      ctx.clearRect(0,0, 500,500)
-      ctx.fillRect(x,y,10,10); // the default is 150 height 300 width, how do I change the actual height and width
-      if (x > 300 || x < 0) {
-        xVelocity = -xVelocity;
-      }
-
-      if (y > 150 || y < 0) {
-        yVelocity = -yVelocity;
-      }
-      x += xVelocity;
-      y += yVelocity;
-    }
-    animate();
-
-  }
 }
