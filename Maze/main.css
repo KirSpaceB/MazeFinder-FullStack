@@ -2,17 +2,18 @@ body {
   display: grid;
   justify-content: center;
   justify-items: center;
+  background-color: gainsboro;
 }
 .navbar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  justify-items: center;
-  width: 800px;
-  height: 100px;
-  background-color: rgb(170, 89, 89);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  width: fit-content;
+  height: fit-content;
 }
 #gridForMaze {
   display: grid;
+  margin-top: 20px;
   grid-template-columns: repeat(16, 1fr);
   width: 500px;
   height: 500px;
@@ -24,35 +25,41 @@ body {
 #saveButton {
   width: 100px;
   height: 50px;
-  background-color: blueviolet;
+  background-color: rgb(149, 145, 145);
+  border-radius: 25% 10%;
 }
 #loadButton {
   width: 100px;
   height: 50px;
-  background-color: rgb(112, 14, 14);
+  background-color: rgb(149, 145, 145);
+  border-radius: 25% 10%;
+
 }
 #gravityButton {
   width: 100px;
   height: 50px;
-  background-color: azure;
+  background-color: rgb(149, 145, 145);
+  border-radius: 25% 10%;
+
 }
-#undoNavButton {
+#sortMazeButton {
   width: 100px;
   height: 50px;
-  background-color: beige;
-}
-#inputGrid {
-  width: 100px;
-  height: 50px;
-  background-color: blanchedalmond;
-}
-#sortMazeButton1 {
-  width: 100px;
-  height: 50px;
-  background-color: bisque;
+  background-color: rgb(149, 145, 145);
+  border-radius: 25% 10%;
+
 }
 #solveMazeButton {
   width: 100px;
   height: 50px;
-  background-color: rgb(83, 213, 220);
+  background-color: rgb(149, 145, 145);
+  border-radius: 25% 10%;
+
+}
+#undoButton {
+  width: 100px;
+  height: 50px;
+  background-color: rgb(149, 145, 145);
+  border-radius: 25% 10%;
+
 }

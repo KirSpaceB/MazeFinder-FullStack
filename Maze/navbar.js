@@ -1,40 +1,16 @@
-import { GravityNav } from "./GravityButtonUI.js";
-import { LoadMazeNav } from "./LoadButtonUI.js";
-import { SaveButton } from "./SaveButtonUI.js";
-import { UndoButton } from "./UndoButtonUI.js";
-import {CreateGrid} from "./CreateGridButtonUI.js";
-import { SortMazeButton } from "./SortMazeButtonUI.js";
-import { SolveMazeButton } from "./SolveMazeButtonUI.js";
+import { AbstractButton } from "./AbstractButton.js";
+export class NavBar extends AbstractButton {
+  constructor() {
+    // the reason theres an undefined is that the super keyword is reffering to the parent class objects
+    // and since we have a blueprint thats not defined it gives us undefined
+    super()
 
-export class navbar {
-  constructor(saveButtonReal,loadButton,undoButton,creategridInput,gravityButton,solveButton,sortButton) {
-    let newSaveButton = new SaveButton();
-    saveButtonReal = newSaveButton;
-    this.saveButtonReal = saveButtonReal;
-
-    let newLoadButton = new LoadMazeNav();
-    loadButton = newLoadButton;
-    this.loadButton = loadButton;
-
-    let newgravityButton = new GravityNav();
-    gravityButton = newgravityButton;
-    this.gravityButton = gravityButton;
-
-    let newUndoButton = new UndoButton();
-    undoButton = newUndoButton;
-    this.undoButton = newUndoButton;
-
-    let newCreatGridInput = new CreateGrid();
-    creategridInput = newCreatGridInput;
-    this.creategridInput = creategridInput;
-    
-    let newSortMazeButton = new SortMazeButton();
-    sortButton = newSortMazeButton;
-    this.sortButton = sortButton;
-
-    let newSolveMazeButton = new SolveMazeButton();
-    solveButton = newSolveMazeButton;
-    this.solveButton = solveButton;
+    let saveButton = new AbstractButton('button','id','saveButton','Save');
+    let loadButton = new AbstractButton('button', 'id', 'loadButton', 'Load');
+    let gravityButton = new AbstractButton('button','id','gravityButton', 'Gravity Mode');
+    let sortMazeButton = new AbstractButton('button','id','sortMazeButton', 'Sort');
+    let solveMazeButton = new AbstractButton('button','id','solveMazeButton', 'Solve');
+    let undoButton = new AbstractButton('button','id', 'undoButton', 'Undo')
   }
 
   creatingNavBar() {
@@ -43,14 +19,13 @@ export class navbar {
     navBarDiv.className = 'navbar';
     navBarDiv.setAttribute('id','navbar');
     document.body.appendChild(navBarDiv);
-    
 
-    navBarDiv.appendChild(this.saveButtonReal);
-    navBarDiv.appendChild(this.loadButton);
-    navBarDiv.appendChild(this.undoButton);
-    navBarDiv.appendChild(this.creategridInput);
-    navBarDiv.appendChild(this.gravityButton);
-    navBarDiv.appendChild(this.sortButton);
-    navBarDiv.appendChild(this.solveButton);
+    navBarDiv.appendChild(saveButton);
+    navBarDiv.appendChild(loadButton);
+    navBarDiv.appendChild(gravityButton);
+    navBarDiv.appendChild(sortMazeButton);
+    navBarDiv.appendChild(solveMazeButton);
+    navBarDiv.appendChild(undoButton);
+
   }
 }
