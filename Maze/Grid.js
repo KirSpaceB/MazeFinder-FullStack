@@ -1,74 +1,31 @@
-export class Grid {
-  constructor(gridForMaze, Maze, WallsForMaze, setStartingPoint) {
-    this.gridForMaze();
-    this.Maze(16);
-    this.WallsForMaze();
+import { GridSquare } from "./GridSquare.js";
 
-    this.gridForMaze = gridForMaze;
-    this.Maze = Maze;
-    this.WallsForMaze = WallsForMaze;
-    this.setStartingPoint = setStartingPoint;
-    
+export class Grid extends GridSquare {
+  constructor() {
+    super();
+    this.gridWrapper();
+    this.mazeGrid(16);
   }
 
-  gridForMaze() {
-    let Grid = document.createElement('div');
-    Grid.setAttribute('id', 'gridForMaze');
-
-    document.body.appendChild(Grid);
-
-    this.Grid = Grid;
+  gridWrapper() {
+    let gridWrapperElement = document.createElement('div');
+    gridWrapperElement.setAttribute('id', 'gridWrapper');
+    gridWrapperElement.style.backgroundColor = "white";
+    document.body.appendChild(gridWrapperElement);
   }
 
+  mazeGrid(size) {
+    let rows = size;
+    let cols = size;
+    let area = rows * cols;
+    let gridWrapper = document.getElementById('gridWrapper');
 
-  Maze(gridSize) {
-    let mazeGridNum = 0;
-    const rows = gridSize;
-    const cols = gridSize;
-    const area = rows * cols;
-
-
-    for (let i = 0; i < area; i++) {
-      this.mazeGrid = document.createElement('div');
-      this.mazeGrid.setAttribute('class', 'mazeGrid');
-      this.mazeGrid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
-      this.mazeGrid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
-
-
-      this.Grid.appendChild(this.mazeGrid);
+    for (let i = 0; i < area; i++ ) {
+      let grid = document.createElement('div');
+      grid.className = 'grid-item';
+      grid.style.backgroundColor = 'white';
+      gridWrapper.appendChild(grid);
     }
-
-  }
-
-  WallsForMaze() {
-    let createWalls = document.querySelectorAll('.mazeGrid');
-
-    for (let i = 0; i < createWalls.length; i++) {
-      let random = Math.floor(Math.random() * 4);
-
-      console.log(random)
-
-      if (random === 0 || random === 1 || random === 2) {
-        createWalls[i].style.backgroundColor = "white"
-      } else if (random === 3) {
-        createWalls[i].style.backgroundColor = "black";
-      } else {
-        return "something went wrong";
-      }
-  }
-
-    // nums.forEach((e) => {
-    //   console.log(typeof e);
-    //   if (random === 0) {
-    //     e.style.backgroundColor = "white";
-    //   } else if (random === 1) {
-    //     e.style.backgroundColor = "black";
-    //   } else {
-    //     return 'error'
-    //   }
-    // })
-
-    // could use set timer to implmenet walls for maze
   }
   
 }

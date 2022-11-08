@@ -11,17 +11,16 @@ body {
   width: fit-content;
   height: fit-content;
 }
-#gridForMaze {
+#gridWrapper {
   display: grid;
-  margin-top: 20px;
-  grid-template-columns: repeat(16, 1fr);
-  width: 500px;
   height: 500px;
+  width: 500px;
+  grid-template-columns: repeat(16, 1fr);
 }
-.mazeGrid {
-  border: 1px solid rgb(170, 170, 230);
+.grid-item {
+  border-style: solid;
+  border-color: red
 }
-
 #saveButton {
   width: 100px;
   height: 50px;
