@@ -1,8 +1,9 @@
-import { Grid } from "./Grid.js";
+import { GridSquare } from "./GridSquare.js";
 import { NavBar } from "./NavBar.js";
 
 
 const navbar1 = new NavBar();
 navbar1.creatingNavBar();
 
-const metaGrid = new Grid();
+const Grid = new GridSquare();
+

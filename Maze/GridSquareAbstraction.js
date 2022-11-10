@@ -1,26 +1,45 @@
 export class GridSquareAbstraction {
-  constructor(element, className, backgroundColor, width, height, squareType) {
-    this.createElement = document.createElement(element);
-    this.createElement.className = className;
-    this.createElement.style.backgroundColor = backgroundColor;
-    this.createElement.style.width = width;
-    this.createElement.style.height = height;
-    document.body.appendChild(this.createElement);
+  constructor(element, className, backgroundColor, width, height) {
+    this.element = element;
+    this.className = className;
+    this.backgroundColor = backgroundColor;
+    this.width = width;
+    this.height = height;
 
-    this.squareType = squareType // a string of "wall,nothing,path, or goal"
-    // Will it go something like if(squareType ="wall") { this.createElement.style.backgroundColor = "black"}?
+    let createElement = document.createElement(element);
+    createElement.className = className;
+    createElement.style.backgroundColor = backgroundColor;
+    createElement.style.width = width;
+    createElement.style.height = height;
     
+    this.squareType = "wall";
+    this.getType(this.squareType);
+    this.setType(this.squareType);
+    return createElement;
   }
-
   setType(newType) {
-    // this.squareType = newType;
-    // this.squareType.style.backgroundColor //create an if statement that will determine which backgroundColor this will bet set to
-    // return this.squareType; // returns squareType for getType method
+    // This method tells the computer to differentiate between the different types of divs to display on the Maze represented by colors
+    // this.newType is determined by setType parameter which takes the argument this.square. Which is hard coded to "Wall" rn
+
+    this.newType = newType;
+    if (this.newType === "wall") {
+      this.backgroundColor = "black";
+    } else if (this.newType === "nothing") {
+      this.backgroundColor = "white";
+    } else if (this.newType === "path") {
+      this.backgroundColor = "pink";
+    } else if (this.newType = "goal") {
+      this.backgroundColor = "blue";
+    } else if (this.newType === "start") {
+      this.backgroundColor = "red";
+    } else {
+      console.log('something went wrong in the method setType at GridSquareAbstraction');
+    }
+    console.log(this.newType);
+    return this.newType;
   }
 
-  getType() {
-    // this.setType(); // calls squareType
-    // let x = this.setType();
-    // console.log(x) // tells me what type the gridsquare is 
+  getType(gridSquareType) {
+    return gridSquareType;
   }
 }

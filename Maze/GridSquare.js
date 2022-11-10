@@ -1,25 +1,27 @@
 import { GridSquareAbstraction } from "./GridSquareAbstraction.js";
 
-export class GridSquare extends GridSquareAbstraction {
+export class GridSquare {
   constructor() {
-    super();
-    
-    let nothing = new GridSquareAbstraction('div', 'nothingDiv', 'black', '100px', '100px');
-    let wall = new GridSquareAbstraction('div', 'wallDiv', 'blue', '100px', '100px');
-    let path = new GridSquareAbstraction('div','pathDiv', 'purple', '100px','100px');
-    let start = new GridSquareAbstraction('div','startDiv', 'red', '100px', '100px');
-    let goal = new GridSquareAbstraction('div', 'goalDiv', 'orange', '100px', '100px');
+  // newSetType.setType('wall'); // this is how you call a function to from a different class to a new class
+  this.gridWrapper();
+  this.setMaze();
+  
+  }
+  
+  gridWrapper(appendedChild) {
+    let divWrapper = document.createElement('div');
+    divWrapper.setAttribute('id', 'divWrapper');
+    document.body.appendChild(divWrapper);
 
-    const n = nothing;
-    const w = wall;
-    const p = path;
-    const s = start;
-    const g = goal;
-    
-    this.n = n;
-    this.w = w;
-    this.p = p;
-    this.s = s;
-    this.g = g;
+    // divWrapper.appendChild(appendedChild);
+  }
+
+  setMaze(inputArray) {
+    let w = new GridSquareAbstraction('div','wallDiv','white');
+    w.setType('wall')
+    console.log(w)
+    let Maze = [w,w,w,w,w]; // should be a list of 5 objects
+
+
   }
 }
