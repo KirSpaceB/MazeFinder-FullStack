@@ -1,9 +1,7 @@
 import { AbstractButton } from "./AbstractButton.js";
-export class NavBar extends AbstractButton {
-  constructor(element, type, typeName, text) {
-    // the reason theres an undefined is that the super keyword is reffering to the parent class objects
-    // and since we have a blueprint thats not defined it gives us undefined
-    super(element, type, typeName, text)
+
+export class NavBar {
+  constructor() {
 
     let saveButton = new AbstractButton('button','id','saveButton','Save');
     let loadButton = new AbstractButton('button', 'id', 'loadButton', 'Load');
