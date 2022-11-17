@@ -6,6 +6,7 @@ export class Grid {
   this.setMaze(); 
   this.createElementArray();
   this.Graph();
+  this.adjacentcyMatrixGraph();
   console.log("Why the hell is this my index", this.maze.indexOf("w"));
   }
   
@@ -107,14 +108,13 @@ export class Grid {
         }
       }
     }
-    // Holds the GridAbstraction MetaData Cuhz
-    console.log(this.mazeArray)
   }
 
   Graph() {
-    console.log(this.mazeArray);
     // nodes for the graph
     this.vertices = this.mazeArray
+    let nodes = this.vertices;
+    console.log(nodes)
     // all possible edges in our array
     let edges = [
       [this.s,this.n],
@@ -122,36 +122,22 @@ export class Grid {
       [this.s,this.g],
       [this.w,this.n],
       [this.p,this.n],
-      
     ]
+    
     this.edges = edges;
-    // takes in a GridSquareAbstraction Object as its argument.
-    // returns an array of adjacent nodes
-    const findAdjacentNodes = function(node) {
-      let adjacentNodes = [];
-      let adjacentNode = 0;
-      for (let edge of edges) {
-        let nodeIdx = edge.indexOf(node);
-        if (nodeIdx > -1) {
-          adjacentNode = nodeIdx === 0 ? edge[1] : edge[0];
-          adjacentNodes.push(adjacentNode);
-        }
-      }
-      console.log(adjacentNodes);
-      
-      return adjacentNodes;
-    }
-    this.adjacentNodes = adjacentNodes;
-    this.adjacentNode = adjacentNode;
-  }
-  //argument is a starting node
-  BFS(start) {
-    console
-    const queue = [start];// starting Node
 
-    while (queue.length > 0) {
-      let airport = queue.shift(); 
-      let edges = this.adjacentNodes;
+    let adjacentcyList = new Map()
+
+    function addNode(airport) {
+      adjacentcyList.set(airport, [])
     }
+    function addEdge(origin, destination) {
+      adjacentcyList.get(origin).push(destination);
+      adjacentcyList.get(destination).push(origin);
+    }
+    edges.forEach(addNode);
+    edges.forEach(route => addEdge(...route));
+    
+  
   }
 }
