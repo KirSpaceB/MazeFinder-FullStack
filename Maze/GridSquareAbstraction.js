@@ -36,7 +36,7 @@ export class GridSquareAbstraction {
   }
 
   getType(elementType) {
-    console.log("Just here to check if elementType is being returned , I return 5 times because theres 5 instances of GridSquareAbstraction in Grid file: %o", elementType)
+    console.log("Just here to check if elementType is being returned", elementType)
     return elementType;
   }
 }

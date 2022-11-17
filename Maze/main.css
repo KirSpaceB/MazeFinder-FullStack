@@ -12,6 +12,7 @@ body {
   height: fit-content;
 }
 #divWrapper {
+  margin-top: 20px;
   display: grid;
   grid-template-rows: repeat(16, 1fr);
   grid-template-columns: repeat(16,1fr);
