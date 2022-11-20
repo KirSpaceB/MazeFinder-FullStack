@@ -37,7 +37,7 @@ export class Grid {
       ["n","n","n","n","n","w","n","w","n","w","n","n","n","w","n","n"],
       ["n","n","n","w","n","n","n","w","n","w","n","w","n","w","n","w"],
       ["n","n","n","w","n","n","n","n","n","w","n","w","n","w","n","n"],
-      ["n","w","n","n","n","n","n","w","n","w","n","w","n","w","w","n"],
+      ["p","w","n","n","n","n","n","w","n","w","n","w","n","w","w","n"],
       ["s","n","n","w","n","n","n","w","n","n","n","w","n","n","n","n"],
     ]
 
@@ -48,9 +48,7 @@ export class Grid {
     this.divWrapperForMaze = divWrapperForMaze;
 
     // contains GridSquareAbstraction maze data
-    this.mazeArray = [
-      []
-    ];
+    this.mazeArray = [];
 
 
     for (let i = 0; i < this.maze.length; i++) {
@@ -107,13 +105,11 @@ export class Grid {
         }
       }
     }
-    // Holds the GridAbstraction MetaData Cuhz
-    console.log(this.mazeArray)
   }
 
   Graph() {
     // nodes for the graph
-    this.vertices = this.mazeArray
+    this.vertices = this.mazeArray;
     // all possible edges in our graph
     let edges = [
       [this.s,this.n],
@@ -121,24 +117,49 @@ export class Grid {
       [this.s,this.g],
       [this.w,this.n],
       [this.p,this.n],
-      
-    ]
+      [this.p, this.w],
+      [this.p, this.g],
+    ];
     this.edges = edges;
-    // takes in a GridSquareAbstraction Object as its argument.
-    // returns an array of adjacent nodes
-    const findAdjacentNodes = function(node) {
-      let adjacentNodes = [];
-      let adjacentNode = 0;
+
+    // variable pointer to Map method
+    const adjacencyList = new Map(); // think of hashmap
+
+    // map method that sets the argument as the key and leaves an empty argue for values to be pushed from addEdge method
+    function addNode(node) {
+      adjacencyList.set(node, []);
+      return node;
+    }
+    // method to push arguments as values for node in addNode method. Connects the nodes to every possible edge
+    function addEdge(start,finish) {
+      adjacencyList.get(start).push(finish);
+      adjacencyList.get(finish).push(start);
+    }
+    this.vertices.forEach(addNode);
+    this.edges.forEach(edge => addEdge(...edge));
+
+    const start = this.s;
+    const goal = this.g;
+    const wall = this.w;
+    const path = this.p;
+    const nothing = this.n;
+    
+    function dfs(start, visted = new Set()) {
+      visted.add(start);
+
+      const edges = adjacencyList.get(start);
+
       for (let edge of edges) {
-        console.log(edge);
-        let nodeIdx = edge.indexOf(node);
-        if (nodeIdx > -1) {
-          adjacentNode = nodeIdx === 0 ? edge[1] : edge[0];
-          adjacentNodes.push(adjacentNode);
+        if (edge === goal) {
+          console.log('DFS found goal');
+          return;
+        }
+
+        if (!visted.has(edge)) {
+          dfs(edge, visted);
         }
       }
-      return adjacentNodes;
     }
-    console.log(findAdjacentNodes(this.s))
+    // dfs(start);
   }
 }
