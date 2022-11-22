@@ -37,7 +37,7 @@ export class Grid {
       ["n","n","n","n","n","w","n","w","n","w","n","n","n","w","n","n"],
       ["n","n","n","w","n","n","n","w","n","w","n","w","n","w","n","w"],
       ["n","n","n","w","n","n","n","n","n","w","n","w","n","w","n","n"],
-      ["p","w","n","n","n","n","n","w","n","w","n","w","n","w","w","n"],
+      ["n","n","n","n","n","n","n","w","n","w","n","w","n","w","w","n"],
       ["s","n","n","w","n","n","n","w","n","n","n","w","n","n","n","n"],
     ]
 
@@ -110,56 +110,40 @@ export class Grid {
   Graph() {
     // nodes for the graph
     this.vertices = this.mazeArray;
-    // all possible edges in our graph
-    let edges = [
-      [this.s,this.n],
-      [this.s,this.w],
-      [this.s,this.g],
-      [this.w,this.n],
-      [this.p,this.n],
-      [this.p, this.w],
-      [this.p, this.g],
-    ];
-    this.edges = edges;
 
-    // variable pointer to Map method
-    const adjacencyList = new Map(); // think of hashmap
+    const s = this.s;
+    const n = this.n;
+    const p = this.p;
+    const w = this.w;
+    const g = this.g;
 
-    // map method that sets the argument as the key and leaves an empty argue for values to be pushed from addEdge method
-    function addNode(node) {
-      adjacencyList.set(node, []);
-      return node;
-    }
-    // method to push arguments as values for node in addNode method. Connects the nodes to every possible edge
-    function addEdge(start,finish) {
-      adjacencyList.get(start).push(finish);
-      adjacencyList.get(finish).push(start);
-    }
-    this.vertices.forEach(addNode);
-    this.edges.forEach(edge => addEdge(...edge));
+    this.nodeIdS = s;
+    this.nodeIdP = p;
+    this.nodeIdN = n;
 
-    const start = this.s;
-    const goal = this.g;
-    const wall = this.w;
-    const path = this.p;
-    const nothing = this.n;
-    
-    function dfs(start, visted = new Set()) {
-      visted.add(start);
+    // let parentNodes = [this.nodeIdS, this.nodeIdP];
+    // const setForParentNodes = new Set(parentNodes);
 
-      const edges = adjacencyList.get(start);
+    let adjacencyList = new Map();
+    this.adjacencyList = adjacencyList;
 
-      for (let edge of edges) {
-        if (edge === goal) {
-          console.log('DFS found goal');
-          return;
-        }
-
-        if (!visted.has(edge)) {
-          dfs(edge, visted);
-        }
+    // takes an this.verticies elements as an argument
+    this.vertices.forEach((e) => {
+      if (e === s) {
+        this.adjacencyList.set([this.nodeIdS], [n,w]);
+      } else if (e === n) {
+        this.adjacencyList.set([this.nodeIdP], [n,w,g]);
+      } else if (e === w) {
+        this.adjacencyList.set([this.nodeIdP], [n,w,g]);
+      } else if (e === p) {
+        this.adjacencyList.set([this.nodeIdN], [p]);
+      } else if (e === g) {
+        this.adjacencyList.set([this.nodeIdP], [g])
+      } else {
+        console.log("unread elements")
       }
-    }
-    // dfs(start);
+    })
+    console.log(this.adjacencyList)
+
   }
 }
