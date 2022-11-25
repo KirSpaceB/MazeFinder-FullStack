@@ -117,33 +117,52 @@ export class Grid {
     const w = this.w;
     const g = this.g;
 
-    this.nodeIdS = s;
-    this.nodeIdP = p;
-    this.nodeIdN = n;
-
-    // let parentNodes = [this.nodeIdS, this.nodeIdP];
-    // const setForParentNodes = new Set(parentNodes);
+    this.nodeIDS = "nodeIds_";
+    this.nodeIDP = "nodeIdp_";
+    this.nodeIDN = "nodeIdn_";
+    this.nodeIDG = "nodeIdg_";
+    this.nodeIDW = "nodeIdw_";
+    this.nodeIdCount = 0;
 
     let adjacencyList = new Map();
     this.adjacencyList = adjacencyList;
 
-    // takes an this.verticies elements as an argument
     this.vertices.forEach((e) => {
       if (e === s) {
-        this.adjacencyList.set([this.nodeIdS], [n,w]);
+        this.adjacencyList.set(this.nodeIDS + this.nodeIdCount.toString(), [n]);
       } else if (e === n) {
-        this.adjacencyList.set([this.nodeIdP], [n,w,g]);
+        this.adjacencyList.set(this.nodeIDP + this.nodeIdCount.toString(), [p,s]);
       } else if (e === w) {
-        this.adjacencyList.set([this.nodeIdP], [n,w,g]);
+        this.adjacencyList.set(this.nodeIDN + this.nodeIdCount.toString(), [n,p]);
       } else if (e === p) {
-        this.adjacencyList.set([this.nodeIdN], [p]);
+        this.adjacencyList.set(this.nodeIDG + this.nodeIdCount.toString(), [n,w,g]);
       } else if (e === g) {
-        this.adjacencyList.set([this.nodeIdP], [g])
+        this.adjacencyList.set(this.nodeIDW + this.nodeIdCount.toString(), [p]);
       } else {
-        console.log("unread elements")
+        console.log("unread elements");
       }
-    })
-    console.log(this.adjacencyList)
+      this.nodeIdCount++
+    });
+    console.log(this.adjacencyList);
+
+    let dfsStack = [];
+
+    dfsStack.push(this.adjacencyList);
+    console.log(dfsStack);
+
+    console.log(this.maze)
+
+    let dfs = (startingNode) => {
+      let startingVerticie = startingNode;
+      // if nodes need to be the adjacencyList becuase it is the graph
+      // then what will the edges be because the adjacencyList also represents the connections between the graphs
+      let nodes = this.adjacencyList
+      this.edges = this.adjacencyList;
+
+      if (startingVerticie != g) {
+
+      }
+    }
 
   }
 }
