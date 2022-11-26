@@ -122,11 +122,12 @@ export class Grid {
     this.nodeIDN = "nodeIdn_";
     this.nodeIDG = "nodeIdg_";
     this.nodeIDW = "nodeIdw_";
-    this.nodeIdCount = 0;
 
+    this.nodeIdCount = 0;
     let adjacencyList = new Map();
     this.adjacencyList = adjacencyList;
 
+    // edges
     this.vertices.forEach((e) => {
       if (e === s) {
         this.adjacencyList.set(this.nodeIDS + this.nodeIdCount.toString(), [n]);
@@ -143,26 +144,13 @@ export class Grid {
       }
       this.nodeIdCount++
     });
-    console.log(this.adjacencyList);
-
+    console.log(this.nodeIdCount)
+    console.log(adjacencyList)
     let dfsStack = [];
+    
+    dfsStack.push(this.adjacencyList.get('nodeIdp_0'))
+    dfsStack.push(this.adjacencyList.get(this.nodeIDS + this.nodeIdCount.toString()))
 
-    dfsStack.push(this.adjacencyList);
-    console.log(dfsStack);
-
-    console.log(this.maze)
-
-    let dfs = (startingNode) => {
-      let startingVerticie = startingNode;
-      // if nodes need to be the adjacencyList becuase it is the graph
-      // then what will the edges be because the adjacencyList also represents the connections between the graphs
-      let nodes = this.adjacencyList
-      this.edges = this.adjacencyList;
-
-      if (startingVerticie != g) {
-
-      }
-    }
-
+    console.log(dfsStack)
   }
 }
