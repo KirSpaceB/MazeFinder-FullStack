@@ -129,40 +129,29 @@ export class Grid {
 
     this.vertices.forEach((e) => {
       if (e === s) {
-        this.adjacencyList.set(this.nodeIDS + this.nodeIdCount.toString(), [n]);
+        e.setKey(this.adjacencyList,n);
       } else if (e === n) {
-        this.adjacencyList.set(this.nodeIDP + this.nodeIdCount.toString(), [p,s]);
+        const keytoAdd = this.nodeIDP + this.nodeIdCount.toString();
+        e.setKey(keytoAdd);
+        this.adjacencyList.set(keytoAdd, [n,w]);
       } else if (e === w) {
-        this.adjacencyList.set(this.nodeIDN + this.nodeIdCount.toString(), [n,p]);
+        const keytoAdd = this.nodeIDN + this.nodeIdCount.toString();
+        e.setKey(keytoAdd);
+        this.adjacencyList.set(keytoAdd, [s,p]);
       } else if (e === p) {
-        this.adjacencyList.set(this.nodeIDG + this.nodeIdCount.toString(), [n,w,g]);
+        const keytoAdd = this.nodeIDG + this.nodeIdCount.toString();
+        e.setKey(keytoAdd);
+        this.adjacencyList.set(keytoAdd, [p]);
       } else if (e === g) {
-        this.adjacencyList.set(this.nodeIDW + this.nodeIdCount.toString(), [p]);
+        const keytoAdd = this.nodeIDW + this.nodeIdCount.toString();
+        e.setKey(keytoAdd);
+        this.adjacencyList.set(keytoAdd, [p]);
       } else {
         console.log("unread elements");
       }
       this.nodeIdCount++
     });
-    console.log(this.adjacencyList);
 
-    let dfsStack = [];
-
-    dfsStack.push(this.adjacencyList);
-    console.log(dfsStack);
-
-    console.log(this.maze)
-
-    let dfs = (startingNode) => {
-      let startingVerticie = startingNode;
-      // if nodes need to be the adjacencyList becuase it is the graph
-      // then what will the edges be because the adjacencyList also represents the connections between the graphs
-      let nodes = this.adjacencyList
-      this.edges = this.adjacencyList;
-
-      if (startingVerticie != g) {
-
-      }
-    }
 
   }
 }

@@ -39,4 +39,16 @@ export class GridSquareAbstraction {
     console.log("Just here to check if elementType is being returned", elementType)
     return elementType;
   }
+
+
+  // We need to use map.entries to somehow get the key of each value and put it in a array
+  setKey(map, input) {
+    for (let [key, value] of map.entries()) {
+      if (value === input) {
+        return key
+      }
+    }
+
+
+  }
 }
