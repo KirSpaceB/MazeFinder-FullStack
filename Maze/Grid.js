@@ -135,32 +135,40 @@ export class Grid {
     // edges
     this.vertices.forEach((e) => {
       if (e === s) {
-        const keyToAdd = this.nodeIDS + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [n]);
+        this.adjacencyList.set(this.nodeIDS + this.nodeIdCount.toString(), [n]);
       } else if (e === n) {
-        const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [p,s]);
+        this.adjacencyList.set(this.nodeIDP + this.nodeIdCount.toString(), [p,s]);
       } else if (e === w) {
-        const keyToAdd = this.nodeIDW + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [n,p]);
+        this.adjacencyList.set(this.nodeIDN + this.nodeIdCount.toString(), [n,p]);
       } else if (e === p) {
-        const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [n,w,g]);
+        this.adjacencyList.set(this.nodeIDG + this.nodeIdCount.toString(), [n,w,g]);
       } else if (e === g) {
-        const keyToAdd = this.nodeIDG + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [p]);
+        this.adjacencyList.set(this.nodeIDW + this.nodeIdCount.toString(), [p]);
       } else {
         console.log("unread elements");
       }
       this.nodeIdCount++
     });
+    console.log(this.adjacencyList);
 
-    console.log(this.adjacencyList)
+    let dfsStack = [];
+
+    dfsStack.push(this.adjacencyList);
+    console.log(dfsStack);
+
+    console.log(this.maze)
+
+    let dfs = (startingNode) => {
+      let startingVerticie = startingNode;
+      // if nodes need to be the adjacencyList becuase it is the graph
+      // then what will the edges be because the adjacencyList also represents the connections between the graphs
+      let nodes = this.adjacencyList
+      this.edges = this.adjacencyList;
+
+      if (startingVerticie != g) {
+
+      }
+    }
 
   }
 }
