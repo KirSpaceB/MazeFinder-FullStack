@@ -42,13 +42,9 @@ export class GridSquareAbstraction {
 
 
   // We need to use map.entries to somehow get the key of each value and put it in a array
-  setKey(map, input) {
-    for (let [key, value] of map.entries()) {
-      if (value === input) {
-        return key
-      }
-    }
-
-
+  setKey(key) {
+    const Mapkeys = [key];
+    console.log(Mapkeys[1])
+    return Mapkeys;
   }
 }

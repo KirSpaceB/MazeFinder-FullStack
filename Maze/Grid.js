@@ -88,7 +88,7 @@ export class Grid {
       }
     }
   }
-
+  //pushes all elements from maze to this.mazeArray
   createElementArray() {
     for (let i = 0; i < this.maze.length; i++) {
       for (let j = 0; j < this.maze[i].length; j++) {
@@ -126,49 +126,33 @@ export class Grid {
     this.nodeIdCount = 0;
     let adjacencyList = new Map();
     this.adjacencyList = adjacencyList;
-
-    function setKey(key) {
-      let setKeyStack = [key];
-      return setKeyStack;
-    }
-
     // edges
     this.vertices.forEach((e) => {
       if (e === s) {
-        this.adjacencyList.set(this.nodeIDS + this.nodeIdCount.toString(), [n]);
+        const keyToAdd = this.nodeIDS + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [n]);
       } else if (e === n) {
-        this.adjacencyList.set(this.nodeIDP + this.nodeIdCount.toString(), [p,s]);
+        const keyToAdd = this.nodeIDN + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [s]);
       } else if (e === w) {
-        this.adjacencyList.set(this.nodeIDN + this.nodeIdCount.toString(), [n,p]);
+        const keyToAdd = this.nodeIDW + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [p,s]);
       } else if (e === p) {
-        this.adjacencyList.set(this.nodeIDG + this.nodeIdCount.toString(), [n,w,g]);
+        const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [w,n,s,g]);
       } else if (e === g) {
-        this.adjacencyList.set(this.nodeIDW + this.nodeIdCount.toString(), [p]);
+        const keyToAdd = this.nodeIDG + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [p]);
       } else {
         console.log("unread elements");
       }
       this.nodeIdCount++
     });
-    console.log(this.adjacencyList);
-
-    let dfsStack = [];
-
-    dfsStack.push(this.adjacencyList);
-    console.log(dfsStack);
-
-    console.log(this.maze)
-
-    let dfs = (startingNode) => {
-      let startingVerticie = startingNode;
-      // if nodes need to be the adjacencyList becuase it is the graph
-      // then what will the edges be because the adjacencyList also represents the connections between the graphs
-      let nodes = this.adjacencyList
-      this.edges = this.adjacencyList;
-
-      if (startingVerticie != g) {
-
-      }
-    }
-
+    
   }
 }
