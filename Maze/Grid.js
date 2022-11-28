@@ -127,30 +127,40 @@ export class Grid {
     let adjacencyList = new Map();
     this.adjacencyList = adjacencyList;
 
+    function setKey(key) {
+      let setKeyStack = [key];
+      return setKeyStack;
+    }
+
     // edges
     this.vertices.forEach((e) => {
       if (e === s) {
-        this.adjacencyList.set(this.nodeIDS + this.nodeIdCount.toString(), [n]);
+        const keyToAdd = this.nodeIDS + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [n]);
       } else if (e === n) {
-        this.adjacencyList.set(this.nodeIDP + this.nodeIdCount.toString(), [p,s]);
+        const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [p,s]);
       } else if (e === w) {
-        this.adjacencyList.set(this.nodeIDN + this.nodeIdCount.toString(), [n,p]);
+        const keyToAdd = this.nodeIDW + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [n,p]);
       } else if (e === p) {
-        this.adjacencyList.set(this.nodeIDG + this.nodeIdCount.toString(), [n,w,g]);
+        const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [n,w,g]);
       } else if (e === g) {
-        this.adjacencyList.set(this.nodeIDW + this.nodeIdCount.toString(), [p]);
+        const keyToAdd = this.nodeIDG + this.nodeIdCount.toString();
+        e.setKey(keyToAdd)
+        this.adjacencyList.set(keyToAdd, [p]);
       } else {
         console.log("unread elements");
       }
       this.nodeIdCount++
     });
-    console.log(this.nodeIdCount)
-    console.log(adjacencyList)
-    let dfsStack = [];
-    
-    dfsStack.push(this.adjacencyList.get('nodeIdp_0'))
-    dfsStack.push(this.adjacencyList.get(this.nodeIDS + this.nodeIdCount.toString()))
 
-    console.log(dfsStack)
+    console.log(this.adjacencyList)
+
   }
 }
