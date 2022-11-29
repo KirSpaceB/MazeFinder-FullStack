@@ -130,23 +130,23 @@ export class Grid {
     this.vertices.forEach((e) => {
       if (e === s) {
         const keyToAdd = this.nodeIDS + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
+        e.Key(keyToAdd)
         this.adjacencyList.set(keyToAdd, [n]);
       } else if (e === n) {
         const keyToAdd = this.nodeIDN + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
+        e.Key(keyToAdd)
         this.adjacencyList.set(keyToAdd, [s]);
       } else if (e === w) {
         const keyToAdd = this.nodeIDW + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
+        e.Key(keyToAdd)
         this.adjacencyList.set(keyToAdd, [p,s]);
       } else if (e === p) {
         const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
+        e.Key(keyToAdd)
         this.adjacencyList.set(keyToAdd, [w,n,s,g]);
       } else if (e === g) {
         const keyToAdd = this.nodeIDG + this.nodeIdCount.toString();
-        e.setKey(keyToAdd)
+        e.Key(keyToAdd)
         this.adjacencyList.set(keyToAdd, [p]);
       } else {
         console.log("unread elements");
