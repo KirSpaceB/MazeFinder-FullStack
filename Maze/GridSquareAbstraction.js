@@ -1,5 +1,5 @@
 export class GridSquareAbstraction {
-  constructor(element, className, backgroundColor, width, height) {
+  constructor(element, className, backgroundColor, width, height, Key) {
     
     this.element = element;
     this.className = className;
@@ -10,6 +10,7 @@ export class GridSquareAbstraction {
     this.createElement.style.backgroundColor = this.backgroundColor;
     this.createElement.style.width = this.width;
     this.createElement.style.height = this.height;
+
   }
 
   // newType is a string argument
@@ -39,14 +40,20 @@ export class GridSquareAbstraction {
     console.log("Just here to check if elementType is being returned", elementType)
     return elementType;
   }
-
-
-  // We need to use map.entries to somehow get the key of each value and put it in a array
-  set Key(some_key_name) {
-    this.key = some_key_name;
+  // takes in this.node_id_ + this.node_key_number as a STRING
+  setID(id) {
+    this.id = id;
   }
   
-  get Key() {
-    return this.key;
+  getID() {
+    return this.id
+  }
+  //takes this.node_id_ as an argument
+  setKey(key) {
+    this.key = key
+  }
+
+  getKey() {
+    return this.key
   }
 }

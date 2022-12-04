@@ -117,42 +117,61 @@ export class Grid {
     const w = this.w;
     const g = this.g;
 
-    this.nodeIDS = "nodeIds_";
-    this.nodeIDP = "nodeIdp_";
-    this.nodeIDN = "nodeIdn_";
-    this.nodeIDG = "nodeIdg_";
-    this.nodeIDW = "nodeIdw_";
+    this.node_id_s = "nodeIds_";
+    this.node_id_p = "nodeIdp_";
+    this.node_id_n = "nodeIdn_";
+    this.node_id_g = "nodeIdg_";
+    this.node_id_w = "nodeIdw_";
 
-    this.nodeIdCount = 0;
-    let adjacencyList = new Map();
-    this.adjacencyList = adjacencyList;
-    // edges
+    this.node_key_number = 0;
+
+    let adjacency_list = new Map();
+
+    this.adjacency_list = adjacency_list;
+
+    // e = html element object from a different Array
     this.vertices.forEach((e) => {
       if (e === s) {
-        const keyToAdd = this.nodeIDS + this.nodeIdCount.toString();
-        e.Key(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [n]);
+        
+        this.start_node_id = e.setKey(`${this.node_id_s}`);//passes string "nodeIds_" to setKey method 
+        this.start_node_key = e.setID(`${this.node_id_s + this.node_key_number}`);// Dynamically change the ID
+        this.get_start_node_ID = e.getID(); // pointer set to Dynamically changingID
+        this.adjacency_list[this.get_start_node_ID] = e.getKey(); // The Dynamic ID is paired with a key. EX:
+        // nodeIdg_15(Dynamic ID) is paried with string "nodeIdg_"
       } else if (e === n) {
-        const keyToAdd = this.nodeIDN + this.nodeIdCount.toString();
-        e.Key(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [s]);
+        
+        this.nothing_node_id = e.setKey(`${this.node_id_n}`);
+        this.nothing_node_key = e.setID(`${this.node_id_n + this.node_key_number}`);
+        this.get_nothing_node_ID = e.getID();
+        this.adjacency_list[this.get_nothing_node_ID] = e.getKey();
+
       } else if (e === w) {
-        const keyToAdd = this.nodeIDW + this.nodeIdCount.toString();
-        e.Key(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [p,s]);
+
+        this.wall_node_id = e.setKey(`${this.node_id_w}`);
+        this.wall_node_key = e.setID(`${this.node_id_w + this.node_key_number}`);
+        this.get_wall_node_ID = e.getID();
+        this.adjacency_list[this.get_wall_node_ID] = e.getKey();
+
       } else if (e === p) {
-        const keyToAdd = this.nodeIDP + this.nodeIdCount.toString();
-        e.Key(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [w,n,s,g]);
+
+        this.path_node_id = e.setKey(`${this.node_id_p}`);
+        this.path_node_key = e.setID(`${this.node_id_p + this.node_key_number}`);
+        this.get_path_node_ID = e.getID();
+        this.adjacency_list[this.get_path_node_ID] = e.getKey();
+
       } else if (e === g) {
-        const keyToAdd = this.nodeIDG + this.nodeIdCount.toString();
-        e.Key(keyToAdd)
-        this.adjacencyList.set(keyToAdd, [p]);
+
+        this.goal_node_id = e.setKey(`${this.node_id_g}`);
+        this.goal_node_key = e.setID(`${this.node_id_g + this.node_key_number}`);
+        this.get_goal_node_ID = e.getID();
+        this.adjacency_list[this.get_goal_node_ID] = e.getKey();
+
       } else {
         console.log("unread elements");
       }
-      this.nodeIdCount++
+      this.node_key_number++
     });
-    
+    console.log(this.adjacency_list)
+
   }
 }
