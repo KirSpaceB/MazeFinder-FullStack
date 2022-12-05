@@ -165,10 +165,11 @@ export class Grid {
         this.goal_node_key = e.setID(`${this.node_id_g + this.node_key_number}`);
         this.get_goal_node_ID = e.getID();
         this.adjacency_list[this.get_goal_node_ID] = e.getKey();
-
+        
       } else {
         console.log("unread elements");
       }
+      console.log(e.getKey())
       this.node_key_number++
     });
     console.log(this.adjacency_list)
