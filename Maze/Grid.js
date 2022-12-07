@@ -1,4 +1,4 @@
-import { GridSquareAbstraction } from "./GridSquareAbstraction.js";
+import { GridSquare } from "./GridSquare.js";
 
 export class Grid {
   constructor() {
@@ -13,9 +13,9 @@ export class Grid {
   // childAppendedToWrapper is a GridSquareAbstraction object
   // This function returns nothing
   gridWrapper() {
-    this.divWrapper = document.createElement('div');
-    this.divWrapper.setAttribute('id', 'divWrapper');
-    document.body.appendChild(this.divWrapper);    
+    const DIV_WRAPPER = document.createElement('div');
+    DIV_WRAPPER.setAttribute('id', 'DIV_WRAPPER');
+    document.body.appendChild(DIV_WRAPPER);    
   }
 
   //takes in zero arguments; 
@@ -41,52 +41,43 @@ export class Grid {
       ["s","n","n","w","n","n","n","w","n","n","n","w","n","n","n","n"],
     ]
 
-    this.maze = maze;
 
     // the wrapper for the maze^
-    let divWrapperForMaze = document.getElementById('divWrapper');
+    const divWrapperForMaze = document.getElementById('DIV_WRAPPER');
     this.divWrapperForMaze = divWrapperForMaze;
 
     // contains GridSquareAbstraction maze data
     this.mazeArray = [];
 
+    for (let i = 0; i < maze.length; i++) {
+      for (let j = 0; j < maze[i].length; j++) {
 
-    for (let i = 0; i < this.maze.length; i++) {
-      for (let j = 0; j < this.maze[i].length; j++) {
-
-        const wallSquare = new GridSquareAbstraction('div', 'wallSquare', 'black');
-        const nothingSquare = new GridSquareAbstraction('div','nothingSquare', 'black');
-        const startSquare = new GridSquareAbstraction('div', 'startSquare', 'black');
-        const goalSquare = new GridSquareAbstraction('div', 'goalSquare', 'black');
-        const pathSquare = new GridSquareAbstraction('div', 'pathSquare', 'black');
-
+        const WALL_SQUARE = new GridSquare('div', 'wallSquare', 'black');
+        const NOTHING_SQUARE = new GridSquare('div','nothingSquare', 'black');
+        const START_SQUARE = new GridSquare('div', 'startSquare', 'black');
+        const GOAL_SQUARE = new GridSquare('div', 'goalSquare', 'black');
+        const PATH_SQUARE = new GridSquare('div', 'pathSquare', 'black');
+        // changes background color depending on the argument passed
+        WALL_SQUARE.setType('wall');
+        NOTHING_SQUARE.setType('nothing');
+        START_SQUARE.setType('start');
+        GOAL_SQUARE.setType('goal');
+        PATH_SQUARE.setType('path');
         
-
-        this.w = wallSquare;
-        this.w.setType('wall');
-        this.n = nothingSquare;
-        this.n.setType('nothing');
-        this.s = startSquare;
-        this.s.setType('start');
-        this.g = goalSquare;
-        this.g.setType('goal');
-        this.p = pathSquare;
-        this.p.setType('path');
-
-
-        if (this.maze[i][j] === "w") {
-          this.divWrapperForMaze.appendChild(this.w.createElement);
-        } else if (this.maze[i][j] === "p") {
-          this.divWrapperForMaze.appendChild(this.p.createElement);
-        } else if (this.maze[i][j] === "g") {
-          this.divWrapperForMaze.appendChild(this.g.createElement)
-        } else if (this.maze[i][j] === "s") {
-          this.divWrapperForMaze.appendChild(this.s.createElement)
-        } else if (this.maze[i][j] === "n") {
-          this.divWrapperForMaze.appendChild(this.n.createElement)
+        if (maze[i][j] === "w") {
+          this.divWrapperForMaze.appendChild(WALL_SQUARE.gridSquareElement);
+        } else if (maze[i][j] === "p") {
+          this.divWrapperForMaze.appendChild(PATH_SQUARE.gridSquareElement);
+        } else if (maze[i][j] === "g") {
+          this.divWrapperForMaze.appendChild(GOAL_SQUARE.gridSquareElement)
+        } else if (maze[i][j] === "s") {
+          this.divWrapperForMaze.appendChild(START_SQUARE.gridSquareElement)
+        } else if (maze[i][j] === "n") {
+          this.divWrapperForMaze.appendChild(NOTHING_SQUARE.gridSquareElement)
         }
       }
     }
+    this.maze = maze
   }
   //pushes all elements from maze to this.mazeArray
   createElementArray() {

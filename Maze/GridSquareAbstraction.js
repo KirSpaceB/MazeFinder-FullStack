@@ -1,39 +1,33 @@
 export class GridSquareAbstraction {
-  constructor(element, className, backgroundColor, width, height, Key) {
-    
-    this.element = element;
-    this.className = className;
-    this.width = width;
-    this.height = height;
-    this.createElement = document.createElement(this.element);
-    this.createElement.className = this.className;
-    this.createElement.style.backgroundColor = this.backgroundColor;
-    this.createElement.style.width = this.width;
-    this.createElement.style.height = this.height;
-
+  constructor(element, className, backgroundColor, width, height) {
+    const gridSquareElement = document.createElement(element);
+    gridSquareElement.className = className;
+    gridSquareElement.style.backgroundColor = backgroundColor;
+    gridSquareElement.style.width = width;
+    gridSquareElement.style.height = height;
+    this.gridSquareElement = gridSquareElement;
   }
 
   // newType is a string argument
   // returns a new backgroundColor for createElement
-  setType(newType) {
+  setType(gridSquareType) {
 
-    this.newType = newType;
+    this.gridSquareType = gridSquareType;
 
-    if (this.newType === "wall") {
+    if ( this.gridSquareType === "wall") {
       this.backgroundColor = "black";
-    } else if (this.newType === "nothing") {
+    } else if ( this.gridSquareType === "nothing") {
       this.backgroundColor = "white";
-    } else if (this.newType === "path") {
+    } else if ( this.gridSquareType === "path") {
       this.backgroundColor = "pink";
-    } else if (this.newType === "goal") {
+    } else if ( this.gridSquareType === "goal") {
       this.backgroundColor = "blue";
-    } else if (this.newType === "start") {
+    } else if ( this.gridSquareType === "start") {
       this.backgroundColor = "red";
     } else {
       console.log('something went wrong in the method setType at GridSquareAbstraction');
     }
-    this.createElement.style.backgroundColor = this.backgroundColor;
-    return this.backgroundColor;
+    this.gridSquareElement.style.backgroundColor = this.backgroundColor;
   }
 
   getType(elementType) {
