@@ -1,32 +1,32 @@
-import { AbstractButton } from "./AbstractButton.js";
-
+import { ButtonUI } from "./ButtonUI.js";
 export class NavBar {
   constructor() {
 
-    let saveButton = new AbstractButton('button','id','saveButton','Save');
-    let loadButton = new AbstractButton('button', 'id', 'loadButton', 'Load');
-    let gravityButton = new AbstractButton('button','id','gravityButton', 'Gravity Mode');
-    let sortMazeButton = new AbstractButton('button','id','sortMazeButton', 'Sort');
-    let solveMazeButton = new AbstractButton('button','id','solveMazeButton', 'Solve');
-    let undoButton = new AbstractButton('button','id', 'undoButton', 'Undo');
-    
-    
+    let saveButton = new ButtonUI('button','id','saveButton','Save');
+    let loadButton = new ButtonUI('button', 'id', 'loadButton', 'Load');
+    let gravityButton = new ButtonUI('button','id','gravityButton', 'Gravity Mode');
+    let sortMazeButton = new ButtonUI('button','id','sortMazeButton', 'Sort');
+    let solveMazeButton = new ButtonUI('button','id','solveMazeButton', 'Solve');
+    let undoButton = new ButtonUI('button','id', 'undoButton', 'Undo');
+
+    this.navBarDiv();
+    this.appendToNavBar(saveButton.BUTTON_ELEMENT);
+    this.appendToNavBar(loadButton.BUTTON_ELEMENT);
+    this.appendToNavBar(gravityButton.BUTTON_ELEMENT);
+    this.appendToNavBar(sortMazeButton.BUTTON_ELEMENT);
+    this.appendToNavBar(solveMazeButton.BUTTON_ELEMENT);
+    this.appendToNavBar(undoButton.BUTTON_ELEMENT);
   }
 
-  creatingNavBar() {
+  navBarDiv() {
+    const CREATE_NAV_ELEMENT = document.createElement('div')
+    CREATE_NAV_ELEMENT.className = 'navbar';
+    CREATE_NAV_ELEMENT.setAttribute('id','navbar');
+    document.body.appendChild(CREATE_NAV_ELEMENT);
+    this.CREATE_NAV_ELEMENT = CREATE_NAV_ELEMENT;
 
-    const navBarDiv = document.createElement('div')
-    navBarDiv.className = 'navbar';
-    navBarDiv.setAttribute('id','navbar');
-    document.body.appendChild(navBarDiv);
-
-
-    navBarDiv.appendChild(saveButton);
-    navBarDiv.appendChild(loadButton);
-    navBarDiv.appendChild(gravityButton);
-    navBarDiv.appendChild(sortMazeButton);
-    navBarDiv.appendChild(solveMazeButton);
-    navBarDiv.appendChild(undoButton);
-
+  }
+  appendToNavBar(element) {
+    this.CREATE_NAV_ELEMENT.appendChild(element);
   }
 }

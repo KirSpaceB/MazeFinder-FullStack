@@ -3,7 +3,7 @@ import { NavBar } from "./NavBar.js";
 
 
 const navbar1 = new NavBar();
-navbar1.creatingNavBar();
+navbar1.navBarDiv();
 
 const grid = new Grid();
 
