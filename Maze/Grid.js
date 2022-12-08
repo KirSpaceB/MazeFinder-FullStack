@@ -4,8 +4,8 @@ export class Grid {
   constructor() {
   this.gridWrapper();
   this.arrayForSquares = [];
-  this.setMaze();
   this.maze;
+  this.setMaze();
   }
   
   gridWrapper() {
@@ -44,15 +44,19 @@ export class Grid {
         const START_SQUARE = new GridSquare('div', 'startSquare', 'black', false);
         const GOAL_SQUARE = new GridSquare('div', 'goalSquare', 'black', false);
         const PATH_SQUARE = new GridSquare('div', 'pathSquare', 'black', false);
-        
-        // changes background color depending on the argument passed
+
         WALL_SQUARE.setType('wall');
         NOTHING_SQUARE.setType('nothing');
         START_SQUARE.setType('start');
         GOAL_SQUARE.setType('goal');
         PATH_SQUARE.setType('path');
 
-        // why is wallSquare 
+        this.wallSquareMark = WALL_SQUARE.markStatus;
+        this.nothingSquareMark = NOTHING_SQUARE.markStatus;
+        this.startSquareMark = START_SQUARE.markStatus;
+        this.goalSquareMark = GOAL_SQUARE.markStatus;
+        this.pathSquareMark = PATH_SQUARE.markStatus;
+
         if (maze[i][j] === "w") {
           MAZE_DIV_WRAPPER.appendChild(WALL_SQUARE.gridSquareElement);
           this.arrayForSquares.push(WALL_SQUARE);
