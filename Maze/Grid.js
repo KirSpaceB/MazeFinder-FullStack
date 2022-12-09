@@ -1,19 +1,18 @@
 import { GridSquare } from "./GridSquare.js";
 // in the context of this what if I only want to import arrayForSquares and this.setMaze();
+// this should only be the maze then we use class like DfsAlgo to generate a new maze with the algorithm solving it 
 export class Grid {
   constructor() {
-  this.gridWrapper();
   this.arrayForSquares = [];
   this.maze;
   this.setMaze();
   }
-  
-  gridWrapper() {
-    const DIV_WRAPPER = document.createElement('div');
-    DIV_WRAPPER.setAttribute('id', 'DIV_WRAPPER');
-    document.body.appendChild(DIV_WRAPPER);
-  }
 
+
+
+  // takes in no arguments
+  // does not return a variable
+  // function has the maze template and appends to DOM depending on the conditions
   setMaze() {
     const maze = [
       ["n","w","n","n","n","w","n","n","n","w","n","n","n","n","n","g"],
@@ -37,6 +36,7 @@ export class Grid {
 
     const MAZE_DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
 
+    // loop for 2d array along with conditions that determine what gets appended to DIV_WRAPPER fnction
     for (let i = 0; i < maze.length; i++) {
       for (let j = 0; j < maze[i].length; j++) {
         const WALL_SQUARE = new GridSquare('div', 'wallSquare', 'black', false);
@@ -56,6 +56,12 @@ export class Grid {
         this.startSquareMark = START_SQUARE.markStatus;
         this.goalSquareMark = GOAL_SQUARE.markStatus;
         this.pathSquareMark = PATH_SQUARE.markStatus;
+
+        // we set all our conditionals before we append the WALL_SQUARE to the maze. So we create functions that will manipulate the GridSquares before we append it. Further elaborating we can append PATH_SQUARES instead of NOTH_SQUARES but everything else stays the same.
+
+        // import 
+
+
 
         if (maze[i][j] === "w") {
           MAZE_DIV_WRAPPER.appendChild(WALL_SQUARE.gridSquareElement);

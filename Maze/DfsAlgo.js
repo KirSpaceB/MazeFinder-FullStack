@@ -2,14 +2,16 @@ import { Grid } from "./Grid.js";
 import { GridSquare } from "./GridSquare.js";
 export class DfsAlgo {
   constructor() {
-    const newGrid = new Grid(); // this is causing another GIRD_WRAPPER in UI
+    const newGrid = new Grid(); 
     let maze = newGrid.maze;// string of the maze not objects
-    this.maze = maze;
+    this.maze = maze; // maze from Grid.js
     this.grid = [];
     this.markingMazeElements();
     console.log(this.grid)
   }
 
+  // takes in no arguments returns no arguments
+  // purpose is to create a new loop to push elements to the this.grid array
   markingMazeElements() {
     for(let r = 0; r < this.maze.length; r++) {
       let row = [];
@@ -35,5 +37,9 @@ export class DfsAlgo {
       }
       this.grid.push(row)
     }
+  }
+
+  checkNeighbors() {
+
   }
 }
