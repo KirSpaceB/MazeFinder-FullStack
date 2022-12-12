@@ -1,9 +1,11 @@
 import { GridSquare } from "./GridSquare.js";
+import { DfsAlgo } from "./DFSAlgo.js";
 // this should only be the maze then we use class like DfsAlgo to generate a new maze with the algorithm solving it 
 export class Grid {
   constructor() {
   this.setMaze();
   this.maze;
+  const implementDFS = new DfsAlgo(this.maze)
   }
   // takes in no arguments
   // does not return a variable
@@ -11,7 +13,7 @@ export class Grid {
   setMaze() {
     const maze = [
       ["n","w","n","n","n","w","n","n","n","w","n","n","n","n","n","g"],
-      ["n","w","n","w","n","w","n","n","n","w","n","n","n","w","n","n"],
+      ["n","w","n","w","n","w","n","n","n","w","n","n","n","w","n","w"],
       ["n","w","n","w","n","n","n","w","n","n","n","w","n","w","n","n"],
       ["n","n","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
       ["n","w","n","n","n","w","n","w","n","n","n","w","w","w","n","w"],

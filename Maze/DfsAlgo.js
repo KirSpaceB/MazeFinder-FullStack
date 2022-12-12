@@ -12,36 +12,62 @@ export class DfsAlgo {
     this.MAZE_DIV_WRAPPER = MAZE_DIV_WRAPPER;
     //create stack
     this.stack = [];
-    //Makes a new array depending on this.maze.length and rather than the original values it is filled with a false boolean. The idea is we covert the boolean, and once boolean is converted a conditional will activate!
-    this.visited = new Array(this.maze.length).fill(false); 
+
+    // Maps all elements from the argument passed to DfsAlgo as false indicating that non of them have been visited
+    const elementVisted = this.maze.map((row) => {
+      return row.map(() => {
+        return false
+      });
+    });
+    this.elementVisted = elementVisted;
+    console.log(this.elementVisted)
+    this.dfsImplementation();
+    console.log(this.elementVisted[0][15])
   }
 
   dfsImplementation() {
-    let startRow, startCol; //variables representing cordinates
-    this.top;
-    this.bottom;
-    this.left;
-    this.right;
-    
+    let startRow, startCol; //variables representing starting cordinates
+    let goalRow, goalCol; // variables representing the ending cordinates
     // Search for the starting position of the maze
     for (let r = 0; r < this.maze.length; r++) {
       for(let c = 0; c < this.maze[r].length; c++) {
         if (this.maze[r][c] === "s") {
           //sets the pointers to the cordinates of "s" in maze
-          startRow = r;
-          startCol = c;
+          startRow = r; 
+          startCol = c; 
+          this.elementVisted[startCol][startRow] = true; // this has opposite indexing
           break; // Stop searching once the starting position is found
         }
       }
     }
-
+    // Search for the goal position and initialize the goal cordinates
+    for (let r = 0; r < this.maze.length; r++) {
+      for (let c = 0; c <this.maze[r].length; c++) {
+        if (this.maze[r][c] === "g") {
+          goalRow = r;
+          goalCol = c;
+          this.elementVisted[goalCol][goalRow] = false; // this should be false
+        }
+      }
+    }
     // adds starting cordinates to the stack
-    this.stack.push([startRow, startCol]);
-    // marks coordinates as true indicating that the coordinates have been visited
-    this.visited[startRow][startCol] = true; // expects this.visited to be 2d array
+    this.stack.push([startRow, startCol]);    
+
+    // Set which prevents the algorithm from revisting visited nodes.
+    // we can do something like if this.nodesVisited = true add to Set
+    this.nodesVisited = new Set();
+    this.nodesVisited.add([startRow,startCol]); // I think I add this to while loop
+    //the neighbors of the cordinate on the very top of the stack
+
+    this.top;
+    this.bottom;
+    this.left;
+    this.right;
+
+    console.log("stack length beofre while loop:", this.stack.length);
 
     while (this.stack.length > 0) {
-      let current = this.stack.pop(); // 
+      let current = this.stack.pop(); // this is how we get the starting node
       let row = current[0];
       let col = current[1];
 
@@ -52,9 +78,9 @@ export class DfsAlgo {
         [row, col + 1], // right
       ]
       
-      // iterates through the neighbors array and setting a pointer to false based on the values
-      for(r = 0; r < neighbors.length; r++) {
-        for (c = 0; c < neighbors[r].length; c++) {
+      // iterates through the neighbors array and setting a pointer to false. So neighbors[0][1] = [row-1,col]
+      for(let r = 0; r < neighbors.length; r++) {
+        for (let c = 0; c < neighbors[r].length; c++) {
           if (neighbors[0][1]) this.top = false;
           if (neighbors[1][1]) this.bottm = false;
           if (neighbors[2][1]) this.left = false;
