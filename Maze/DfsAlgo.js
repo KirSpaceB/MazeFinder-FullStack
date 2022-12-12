@@ -5,7 +5,9 @@ import { GridSquare } from "./GridSquare.js";
 // if we import this class to Grid.js we can do something like const useDfsAlgo = new DfsAlgo(). Then we can do something like DfsAlgo(this.maze)
 export class DfsAlgo {
   constructor(maze) {
+    // references the argument passed in
     this.maze = maze;
+    // appends elements to the DOM so we can see it 
     const MAZE_DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
     this.MAZE_DIV_WRAPPER = MAZE_DIV_WRAPPER;
     //create stack
@@ -39,24 +41,24 @@ export class DfsAlgo {
     this.visited[startRow][startCol] = true; // expects this.visited to be 2d array
 
     while (this.stack.length > 0) {
-      let current = stack.pop(); // 
+      let current = this.stack.pop(); // 
       let row = current[0];
       let col = current[1];
 
       let neighbors = [
         [row - 1, col], //top
-        [row, col + 1], //right
-        [row - 1, col], //bottom
-        [row, col - 1], // left
+        [row + 1, col], //bottom
+        [row, col - 1], //left
+        [row, col + 1], // right
       ]
       
-      // Checks each neighbor of the current position
+      // iterates through the neighbors array and setting a pointer to false based on the values
       for(r = 0; r < neighbors.length; r++) {
         for (c = 0; c < neighbors[r].length; c++) {
           if (neighbors[0][1]) this.top = false;
-          if (neighbors[1][1]) this.right = false;
-          if (neighbors[2][1]) this.bottom = false;
-          if (neighbors[3][1]) this.left = false;
+          if (neighbors[1][1]) this.bottm = false;
+          if (neighbors[2][1]) this.left = false;
+          if (neighbors[3][1]) this.right = false;
         }
       }
       // The vision is we have a starting point in this case the starting point is current. We want current to check if it has a top,bottom,left,right neighbor
