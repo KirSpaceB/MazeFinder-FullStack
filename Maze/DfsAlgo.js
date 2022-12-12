@@ -1,45 +1,65 @@
-import { Grid } from "./Grid.js";
 import { GridSquare } from "./GridSquare.js";
+// do something like this.maze.DFSAlgo() does the algorithm on the maze
+// always think what happens when we import dfsAlgo
+// I thnk we implement dfs first than append to 'DIV_WRAPPER'
+// if we import this class to Grid.js we can do something like const useDfsAlgo = new DfsAlgo(). Then we can do something like DfsAlgo(this.maze)
 export class DfsAlgo {
-  constructor() {
-    const newGrid = new Grid(); 
-    let maze = newGrid.maze;// string of the maze not objects
-    this.maze = maze; // maze from Grid.js
-    this.grid = [];
-    this.markingMazeElements();
-    console.log(this.grid)
+  constructor(maze) {
+    this.maze = maze;
+    const MAZE_DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
+    this.MAZE_DIV_WRAPPER = MAZE_DIV_WRAPPER;
+    //create stack
+    this.stack = [];
+    //Makes a new array depending on this.maze.length and rather than the original values it is filled with a false boolean. The idea is we covert the boolean, and once boolean is converted a conditional will activate!
+    this.visited = new Array(this.maze.length).fill(false); 
   }
 
-  // takes in no arguments returns no arguments
-  // purpose is to create a new loop to push elements to the this.grid array
-  markingMazeElements() {
-    for(let r = 0; r < this.maze.length; r++) {
-      let row = [];
+  dfsImplementation() {
+    let startRow, startCol; //variables representing cordinates
+    this.top;
+    this.bottom;
+    this.left;
+    this.right;
+    
+    // Search for the starting position of the maze
+    for (let r = 0; r < this.maze.length; r++) {
       for(let c = 0; c < this.maze[r].length; c++) {
-        if(this.maze[r][c] === "w") {
-          let WALL_SQUARE = new GridSquare('div','WALL_SQUARE', 'black', false);
-          row.push(WALL_SQUARE.gridSquareElement);
-        } else if (this.maze[r][c] === "n") {
-          let NOTHING_SQUARE = new GridSquare('div', 'NOTHING_SQUARE', 'white', false);
-          row.push(NOTHING_SQUARE.gridSquareElement);
-        } else if(this.maze[r][c] === "p") {
-          let PATH_SQUARE = new GridSquare('div', 'PATH_SQUARE', 'pink', false);
-          row.push(PATH_SQUARE.gridSquareElement);
-        } else if(this.maze[r][c] === "s") {
-          let START_SQUARE = new GridSquare('div', 'START_SQUARE', 'red', false);
-          row.push(START_SQUARE.gridSquareElement);
-        } else if (this.maze[r][c] === "g") {
-          let GOAL_SQUARE = new GridSquare('div', 'GOAL_SQUARE', 'blue', false);
-          row.push(GOAL_SQUARE.gridSquareElement);
-        } else {
-          console.log('check markingMazeElements method in DFSALGO')
+        if (this.maze[r][c] === "s") {
+          //sets the pointers to the cordinates of "s" in maze
+          startRow = r;
+          startCol = c;
+          break; // Stop searching once the starting position is found
         }
       }
-      this.grid.push(row)
     }
-  }
 
-  checkNeighbors() {
+    // adds starting cordinates to the stack
+    this.stack.push([startRow, startCol]);
+    // marks coordinates as true indicating that the coordinates have been visited
+    this.visited[startRow][startCol] = true; // expects this.visited to be 2d array
 
+    while (this.stack.length > 0) {
+      let current = stack.pop(); // 
+      let row = current[0];
+      let col = current[1];
+
+      let neighbors = [
+        [row - 1, col], //top
+        [row, col + 1], //right
+        [row - 1, col], //bottom
+        [row, col - 1], // left
+      ]
+      
+      // Checks each neighbor of the current position
+      for(r = 0; r < neighbors.length; r++) {
+        for (c = 0; c < neighbors[r].length; c++) {
+          if (neighbors[0][1]) this.top = false;
+          if (neighbors[1][1]) this.right = false;
+          if (neighbors[2][1]) this.bottom = false;
+          if (neighbors[3][1]) this.left = false;
+        }
+      }
+      // The vision is we have a starting point in this case the starting point is current. We want current to check if it has a top,bottom,left,right neighbor
+    }
   }
 }

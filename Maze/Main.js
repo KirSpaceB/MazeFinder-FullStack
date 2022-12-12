@@ -10,4 +10,3 @@ const mazeWrapper = new MazeDivWrapper();
 
 const grid = new Grid();
 
-const newDFS = new DfsAlgo();
