@@ -1,93 +1,115 @@
 import { GridSquare } from "./GridSquare.js";
-// do something like this.maze.DFSAlgo() does the algorithm on the maze
-// always think what happens when we import dfsAlgo
-// I thnk we implement dfs first than append to 'DIV_WRAPPER'
-// if we import this class to Grid.js we can do something like const useDfsAlgo = new DfsAlgo(). Then we can do something like DfsAlgo(this.maze)
+
 export class DfsAlgo {
   constructor(maze) {
-    // references the argument passed in
     this.maze = maze;
     // appends elements to the DOM so we can see it 
     const MAZE_DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
     this.MAZE_DIV_WRAPPER = MAZE_DIV_WRAPPER;
-    //create stack
-    this.stack = [];
-
-    // Maps all elements from the argument passed to DfsAlgo as false indicating that non of them have been visited
-    const elementVisted = this.maze.map((row) => {
-      return row.map(() => {
-        return false
-      });
-    });
-    this.elementVisted = elementVisted;
-    console.log(this.elementVisted)
-    this.dfsImplementation();
-    console.log(this.elementVisted[0][15])
+    console.log(this.graph())
+    this.Implementation(this.graph(), "s", "g");
+    console.log(this.Implementation(this.graph(),"s","g"))
   }
 
-  dfsImplementation() {
-    let startRow, startCol; //variables representing starting cordinates
-    let goalRow, goalCol; // variables representing the ending cordinates
-    // Search for the starting position of the maze
-    for (let r = 0; r < this.maze.length; r++) {
-      for(let c = 0; c < this.maze[r].length; c++) {
-        if (this.maze[r][c] === "s") {
-          //sets the pointers to the cordinates of "s" in maze
-          startRow = r; 
-          startCol = c; 
-          this.elementVisted[startCol][startRow] = true; // this has opposite indexing
-          break; // Stop searching once the starting position is found
+  graph() {
+    const adjacencyList = new Map();
+  
+    for (let row = 0; row < this.maze.length; row++) {
+      for (let col = 0; col < this.maze[row].length; col++) {
+
+        // prevents "w" and "g as keys". This is done becasue, we want to avoid these and only read that "n" as paths we technically we are telling the computer that these values you can't as paths
+        if (this.maze[row][col] === "w" || this.maze[row][col] === "g") continue;
+        
+        // only "s" and "n" are keys becasue of the conditional above
+        if (!adjacencyList.has(this.maze[row][col])) {
+          adjacencyList.set(this.maze[row][col], []);
+        }
+
+        // Add adjacent elements to the adjacency list
+        // row has to be greater than 0 because if its 0 it becomes undefined becuase of the row-1
+        // check top neighbor
+        if (row > 0 && this.maze[row - 1][col] !== "w") {
+          //get all elements in this.maze[row][col] and pushes the ones that are [row-1][col]
+          adjacencyList.get(this.maze[row][col]).push(this.maze[row - 1][col]);
+        }
+        //checks bottom
+        if (row < this.maze.length - 1 && this.maze[row + 1][col] !== "w") {
+          adjacencyList.get(this.maze[row][col]).push(this.maze[row + 1][col]);
+        }
+        //checks left
+        if (col > 0 && this.maze[row][col - 1] !== "w") {
+          adjacencyList.get(this.maze[row][col]).push(this.maze[row][col - 1]);
+        }
+        //checks right
+        if (col < this.maze[row].length - 1 && this.maze[row][col + 1] !== "w") {
+          adjacencyList.get(this.maze[row][col]).push(this.maze[row][col + 1]);
         }
       }
     }
-    // Search for the goal position and initialize the goal cordinates
-    for (let r = 0; r < this.maze.length; r++) {
-      for (let c = 0; c <this.maze[r].length; c++) {
-        if (this.maze[r][c] === "g") {
-          goalRow = r;
-          goalCol = c;
-          this.elementVisted[goalCol][goalRow] = false; // this should be false
+    return adjacencyList;
+  }
+
+
+  Implementation(adjacencyList, start, goal) {
+    // marks the visited nodes
+    const visted = new Set()
+    // starting vertex of our graph
+    const stack = [start];
+
+    const paths = new Map();
+    paths.set(start, [start]);
+    // as long as strack length is not empty do whats inside the block
+    while (stack.length > 0) {
+      // sets pointer to the most recent value in the stack
+      let current = stack.pop();
+
+      if (current === goal) return paths.get(current);
+      // checks if current is marked
+      if (visted.has(current)) continue;
+
+      for (let row = 0; row < this.maze.length; row++) {
+        for (let col = 0; col < this.maze[row].length; col++) {
+          if (this.maze[row][col] === "n") {
+            this.maze[row][col] = "p";
+          }
+
+          if (this.maze[row][col] === "n") {
+            const NOTHING_SQUARE = new GridSquare('div','NOTHING_SQUARE','white');
+            NOTHING_SQUARE.setType('nothing');
+            this.MAZE_DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
+          } else if (this.maze[row][col] === "w") {
+            const WALL_SQUARE = new GridSquare('div', 'WALL_SQUIARE', 'black');
+            WALL_SQUARE.setType('wall');
+            this.MAZE_DIV_WRAPPER.appendChild(WALL_SQUARE.gridSquareElement);
+          } else if (this.maze[row][col] === "s") {
+            const START_SQUARE = new GridSquare('div', 'START_SQUARE', 'red');
+            START_SQUARE.setType('start');
+            this.MAZE_DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement); 
+          } else if (this.maze[row][col] === "g") {
+            const GOAL_SQUARE = new GridSquare('div','GOAL_SQUARE', 'blue');
+            GOAL_SQUARE.setType('goal');
+            this.MAZE_DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
+          }
+          if (this.maze[row][col] === "p") {
+            setTimeout(() => {
+              const PATH_SQUARE = new GridSquare('div','PATH_SQUARE', 'pink');
+              PATH_SQUARE.setType('path');
+              this.MAZE_DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
+            }, 1000);
+          }
         }
       }
-    }
-    // adds starting cordinates to the stack
-    this.stack.push([startRow, startCol]);    
 
-    // Set which prevents the algorithm from revisting visited nodes.
-    // we can do something like if this.nodesVisited = true add to Set
-    this.nodesVisited = new Set();
-    this.nodesVisited.add([startRow,startCol]); // I think I add this to while loop
-    //the neighbors of the cordinate on the very top of the stack
+      visted.add(current);
 
-    this.top;
-    this.bottom;
-    this.left;
-    this.right;
-
-    console.log("stack length beofre while loop:", this.stack.length);
-
-    while (this.stack.length > 0) {
-      let current = this.stack.pop(); // this is how we get the starting node
-      let row = current[0];
-      let col = current[1];
-
-      let neighbors = [
-        [row - 1, col], //top
-        [row + 1, col], //bottom
-        [row, col - 1], //left
-        [row, col + 1], // right
-      ]
+      // Add the current node's neighbors to the stack
+      const neighbors = adjacencyList.get(current);
       
-      // iterates through the neighbors array and setting a pointer to false. So neighbors[0][1] = [row-1,col]
-      for(let r = 0; r < neighbors.length; r++) {
-        for (let c = 0; c < neighbors[r].length; c++) {
-          if (neighbors[0][1]) this.top = false;
-          if (neighbors[1][1]) this.bottm = false;
-          if (neighbors[2][1]) this.left = false;
-          if (neighbors[3][1]) this.right = false;
-        }
+      for (let neighbor of neighbors) {
+        stack.push(neighbor);
+        paths.set(neighbor, [...paths.get(current), neighbor]);
       }
-      // The vision is we have a starting point in this case the starting point is current. We want current to check if it has a top,bottom,left,right neighbor
     }
+    return null;
   }
 }
