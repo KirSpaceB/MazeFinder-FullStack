@@ -1,11 +1,13 @@
 import { NavBar } from "./NavBar.js";
-import { ButtonUI } from "./ButtonUI.js";
-
+import { SetGoal } from "./SetGoal.js";
+import { MazeDivWrapper } from "./MazeDivWrapper.js";
 class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
       MainSingleton.instance = this;
-      this.NavBarr = new NavBar();
+      this.NavBar = new NavBar();
+      this.MazeDivWrapper = new MazeDivWrapper(); // generates grid for us
+      this.SetGoal = new SetGoal()
     }
     return MainSingleton.instance;
   }

@@ -20,10 +20,7 @@ body {
   height: 500px;
   background-color: white;
 }
-.wallDiv {
-  border: solid;
-  border-color: rgb(221, 224, 228);
-}
+
 #saveButton {
   width: 100px;
   height: 50px;

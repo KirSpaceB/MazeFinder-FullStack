@@ -7,7 +7,6 @@ export class NavBar {
     CREATE_NAV_ELEMENT.setAttribute('id', 'navbar');
     document.body.appendChild(CREATE_NAV_ELEMENT);
 
-
     let saveButton = new ButtonUI('button','id','saveButton','Save');
     let loadButton = new ButtonUI('button', 'id', 'loadButton', 'Load');
     let gravityButton = new ButtonUI('button','id','gravityButton', 'Gravity Mode');
@@ -21,7 +20,5 @@ export class NavBar {
     CREATE_NAV_ELEMENT.appendChild(sortMazeButton.BUTTON_ELEMENT);
     CREATE_NAV_ELEMENT.appendChild(solveMazeButton.BUTTON_ELEMENT);
     CREATE_NAV_ELEMENT.appendChild(undoButton.BUTTON_ELEMENT);
-    this.CREATE_NAV_ELEMENT = CREATE_NAV_ELEMENT;
-
   }
 }
