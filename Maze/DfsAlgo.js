@@ -2,41 +2,22 @@
 export class DfsAlgo {
   constructor(maze) {
     this.maze = maze;
-
-
-    console.log(this.graph())
+    this.graph()
   }
 
   graph() {
     let maze = this.maze;
-    let adjacencyList = new Map()
-    
+    console.log(maze)
 
-  }
-
-
-  Implementation(adjacencyList, start, target) {
-    // marks the visited nodes
-    const visted = new Set()
-    // starting vertex of our graph
-    const stack = [start];
-    // variable to store the path
-    const path = [];
-
-    while (stack.length > 0) {
-      let current = stack.pop();
-
-      if (current === target) return path.concat(current);
-
-      if (!visted.has(current)) {
-        visted.add(current)
-
-        path.push(current);
-        const neighbors = adjacencyList.get(current);
-
-        stack.push(neighbors)
-      }      
+    for (let r = 0; r < maze.length; r++) {
+      for (let c = 0; c < maze[r].length; c++){
+        console.log(c.length)
+      }
     }
-    return [];
   }
+
+
+
+
+
 }
