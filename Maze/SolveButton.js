@@ -1,10 +1,11 @@
 import { ElementUI } from "./ElementUI.js";
-export class SolveButton extends ElementUI {
+export class SolveButton {
   constructor() {
-    super('button','id','solveMazeButton', 'Solve');
+    this.uiStructure()
   }
 
   uiStructure() {
+    // Creates the elements that houses
     const DROP_DOWN = new ElementUI('div','class','dropdown', '');
     const SELECT = new ElementUI('div','class','select', '');
     const SELECTED = new ElementUI('span','class','selected','Solve');
@@ -20,21 +21,26 @@ export class SolveButton extends ElementUI {
     SELECT.ELEMENT.appendChild(SELECTED.ELEMENT);
     SELECT.ELEMENT.appendChild(CARET.ELEMENT);
 
+    // dropdown list eleents
     UL.ELEMENT.appendChild(liDFS.ELEMENT);
     UL.ELEMENT.appendChild(liBFS.ELEMENT);
     UL.ELEMENT.appendChild(liDijkstras.ELEMENT);
     UL.ELEMENT.appendChild(liAStar.ELEMENT);
 
+    // dropdown list
     DROP_DOWN.ELEMENT.appendChild(UL.ELEMENT);
-
+    
+    // So here we select all the htmlElements in the dropdown div. 
+    // After we select it we add the forEach method, and then we select each individual div using querySelector
+    // Then we add an event listener to the select div that dropdown the menu and dropup the menu.
+    // Then we iterate through each item in the ul and replace the main text with the one clicked then reset the main text with the one selected.
     const dropdown = document.querySelectorAll('.dropdown');
-
     dropdown.forEach((dd) => {
       const select = dd.querySelector('.select');
-      const caret = dd.querySelector('.caret')
-      const menu = dd.querySelector('.menu')
-      const options = dd.querySelectorAll('.menu li')
-      const selected = dd.querySelector('.selected')
+      const caret = dd.querySelector('.caret');
+      const menu = dd.querySelector('.menu');
+      const options = dd.querySelectorAll('.menu li');
+      const selected = dd.querySelector('.selected');
 
       select.addEventListener('click', () => {
         select.classList.toggle('select-clicked');
@@ -56,8 +62,7 @@ export class SolveButton extends ElementUI {
           option.classList.add('active');
           
         });
-      })
-    })
-
-  }
-}
+      });
+    });
+  };
+};

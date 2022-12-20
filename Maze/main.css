@@ -21,18 +21,28 @@ body {
 .navbar {
   display: grid;
   box-sizing: border-box;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   width: fit-content;
   height: fit-content;
+  justify-content: center;
+  align-items: center;
 }
 
+/*CSS for the dropdown menu - start*/
 .dropdown {
   box-sizing: border-box;
-  min-width: 15em;
+  min-width: 6em;
   position: relative;
   margin: 2em;
 }
+.dropdown1 {
+  box-sizing: border-box;
+  min-width: 6em;
+  position: relative;
+  margin: 2em;
+}
+
 .select {
   background: #2a2f3b;
   color: #fff;
@@ -43,7 +53,6 @@ body {
   border-radius: 0.5em;
   padding: 1em;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .select-clicked {
@@ -101,3 +110,4 @@ body {
   display: block;
   opacity: 1;
 }
+/*end*/
