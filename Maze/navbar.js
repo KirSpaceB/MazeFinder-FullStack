@@ -19,9 +19,6 @@ export class NavBar {
     const SORT_BUTTON_SELECTOR = document.querySelector('.dropdown1');
     const RESET_BUTTON_SELECTOR = document.querySelector('#resetButton');
     
-    console.log(SOLVE_BUTTON_SELECTOR)
-    console.log(gravityButton)
-
     CREATE_NAV_ELEMENT.appendChild(SOLVE_BUTTON_SELECTOR);
     CREATE_NAV_ELEMENT.appendChild(gravityButton);
     CREATE_NAV_ELEMENT.appendChild(SORT_BUTTON_SELECTOR);
