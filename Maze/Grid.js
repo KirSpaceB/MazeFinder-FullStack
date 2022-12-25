@@ -5,6 +5,7 @@ export class Grid {
   constructor() {
     this.maze();
     this.dfsImplementation();
+    this.appendingMaze();
   }
 
   maze() {
@@ -19,38 +20,15 @@ export class Grid {
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
+      ['n','n','n','n','n','n','n','n','n','n','n','g','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
-      ['n','n','n','n','n','g','n','n','n','n','n','n','n','n','n','n'],
       ['s','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
     ]
 
-    
     this.grid = maze;
-
-    const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
-
-
-    for (let r = 0; r < this.grid.length; r++) {
-      for(let c = 0; c < this.grid[r].length; c++) {
-        if(this.grid[r][c] === "s") {
-          const start = new GridSquare('div','start');
-          start.setType('start');
-          DIV_WRAPPER.appendChild(start.gridSquareElement);
-        } else if(this.grid[r][c] === "n") {
-          const nothing = new GridSquare('div','NOTHING_SQUARE');
-          nothing.setType('nothing');
-          this.nothing = nothing;
-          DIV_WRAPPER.appendChild(this.nothing.gridSquareElement);
-        } else if(this.grid[r][c] === "g") {
-          const goal = new GridSquare('div');
-          goal.setType('goal');
-          DIV_WRAPPER.appendChild(goal.gridSquareElement);
-        }
-      }
-    }
 
   }
 
@@ -83,6 +61,12 @@ export class Grid {
         console.log('goal found');
         return true
       }
+
+      // So the idea is we change the "n" traversed to p and THEN do the method that appends elements to the grid
+      if(this.grid[row][col] === "n") {
+        this.grid[row][col] = "p"
+      }
+
       // checks neighbors
       for(const [dRow, dCol] of [[-1,0],[1,0],[0,-1],[0,1]]) {
         const newRow = row + dRow;
@@ -90,17 +74,40 @@ export class Grid {
         // marks the bounderies of the grid and checks for new nodes to visit
         if(newRow >= 0 && newRow < this.grid.length && newCol >= 0 && newCol < this.grid.length && !visited.has(`${newRow},${newCol}`)) {
           stack.push([newRow,newCol]);
-          console.log(`Exploring node at row ${newRow}, column ${newCol}`); 
-          // suppose to change the nothing square to path type to show the path that dfs search is taking
-          setTimeout(() => {
-            console.log(this.grid[newRow][newCol])
-            if(this.grid[newRow][newCol] === "n") {
-              this.nothing.setType('path')
-            }
-          },500);
+          console.log(`Exploring node at row ${newRow}, column ${newCol}`);  
         }
       }
     }
     console.log('goal not found');
+  }
+  
+  appendingMaze() {
+    console.log(this.grid);
+    const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
+
+    for(let r = 0; r < this.grid.length; r++) {
+      for(let c = 0; c < this.grid[r].length; c++) {
+        console.log(this.grid[r][c]);
+
+        if(this.grid[r][c] === "s") {
+          const START_SQUARE = new GridSquare('div');
+          START_SQUARE.setType('start');
+          DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
+        } else if(this.grid[r][c] === "n") {
+          const NOTHING_SQUARE = new GridSquare('div');
+          NOTHING_SQUARE.setType('nothing');
+          DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
+        } else if (this.grid[r][c] === "p") {
+          const PATH_SQUARE = new GridSquare('div');
+          PATH_SQUARE.setType('path');
+          DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement)
+        } else if (this.grid[r][c] === "g") {
+          const GOAL_SQUARE = new GridSquare('div');
+          GOAL_SQUARE.setType('goal');
+          DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
+        } 
+      }
+    }
+    
   }
 }

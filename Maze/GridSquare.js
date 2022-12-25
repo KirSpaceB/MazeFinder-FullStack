@@ -16,7 +16,7 @@ export class GridSquare {
     } else if ( this.gridSquareType === "nothing") {
       this.backgroundColor = "white";
     } else if ( this.gridSquareType === "path") {
-      this.backgroundColor = "pink";
+      this.backgroundColor = "orange";
     } else if ( this.gridSquareType === "goal") {
       this.backgroundColor = "blue";
     } else if ( this.gridSquareType === "start") {
