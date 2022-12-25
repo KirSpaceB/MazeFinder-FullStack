@@ -10,6 +10,7 @@ export class Grid {
 
   maze() {
     let maze = [
+      ['n','n','n','n','n','n','n','n','g','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
@@ -20,7 +21,6 @@ export class Grid {
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
-      ['n','n','n','n','n','n','n','n','n','n','n','g','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
@@ -85,29 +85,102 @@ export class Grid {
     console.log(this.grid);
     const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
 
-    for(let r = 0; r < this.grid.length; r++) {
-      for(let c = 0; c < this.grid[r].length; c++) {
-        console.log(this.grid[r][c]);
+    let counter = 0;
 
-        if(this.grid[r][c] === "s") {
-          const START_SQUARE = new GridSquare('div');
-          START_SQUARE.setType('start');
-          DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
-        } else if(this.grid[r][c] === "n") {
-          const NOTHING_SQUARE = new GridSquare('div');
-          NOTHING_SQUARE.setType('nothing');
-          DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
-        } else if (this.grid[r][c] === "p") {
-          const PATH_SQUARE = new GridSquare('div');
-          PATH_SQUARE.setType('path');
-          DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement)
-        } else if (this.grid[r][c] === "g") {
-          const GOAL_SQUARE = new GridSquare('div');
-          GOAL_SQUARE.setType('goal');
-          DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
-        } 
+    const intervalId = setInterval(() => {
+      if (counter >= this.grid.length * this.grid[0].length) {
+        clearInterval(intervalId);
+        return;
       }
-    }
     
+      for(let r = 0; r < this.grid.length; r++) {
+        for(let c = 0; c < this.grid[r].length; c++) {
+    
+          if(this.grid[r][c] === "s") {
+            const START_SQUARE = new GridSquare('div');
+            START_SQUARE.setType('start');
+            DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
+            counter++;
+          } else if (this.grid[r][c] === "n") {
+            const NOTHING_SQUARE = new GridSquare('div');
+            NOTHING_SQUARE.setType('nothing');
+            DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
+            counter++;
+          } else if (this.grid[r][c] === "p") {
+            const PATH_SQUARE = new GridSquare('div');
+            PATH_SQUARE.setType('path');
+            PATH_SQUARE.gridSquareElement.style.opacity = 0;
+            PATH_SQUARE.gridSquareElement.style.transform = "scale(0.5)";
+            DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
+            setTimeout(() => {
+              PATH_SQUARE.gridSquareElement.style.opacity = 1;
+              PATH_SQUARE.gridSquareElement.style.transform = "scale(1)";
+            }, 100);
+            counter++;
+          } else if (this.grid[r][c] === "g") {
+            const GOAL_SQUARE = new GridSquare('div');
+            GOAL_SQUARE.setType('goal');
+            DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
+            counter++;
+          }
+        }
+      }
+      let pathCounter = 0;
+      const pathSquares = document.querySelectorAll('.path');
+      console.log(pathSquares)
+      const animatePathSquare = () => {
+        if (pathCounter >= pathSquares.length) {
+          return;
+        }
+    
+        pathSquares[pathCounter].style.opacity = 0;
+        pathSquares[pathCounter].style.transform = "scale(0.5)";
+        setTimeout(() => {
+          pathSquares[pathCounter].style.backgroundColor = "pink";
+          pathSquares[pathCounter].style.opacity = 1;
+          pathSquares[pathCounter].style.transform = "scale(1)";
+          pathCounter++;
+          animatePathSquare();
+        }, 100 * pathCounter);
+      };
+      animatePathSquare();
+    }, 100);  // interval of 100ms
+
+
+
+    // for(let r = 0; r < this.grid.length; r++) {
+    //   for(let c = 0; c < this.grid[r].length; c++) {
+    //     console.log(this.grid[r][c]);
+
+    //     if(this.grid[r][c] === "s") {
+    //       const START_SQUARE = new GridSquare('div');
+    //       START_SQUARE.setType('start');
+    //       START_SQUARE.gridSquareElement.style.opacity = '0';
+    //       START_SQUARE.gridSquareElement.style.transform = "scale(0.5)";
+    //       DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
+    //       START_SQUARE.gridSquareElement.style.opacity  = 1;
+    //       START_SQUARE.gridSquareElement.style.transform = "scale(1)";
+    //       counter++
+    //     } else if(this.grid[r][c] === "n") {
+    //       const NOTHING_SQUARE = new GridSquare('div');
+    //       NOTHING_SQUARE.setType('nothing');
+    //       DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
+    //     } else if (this.grid[r][c] === "p") {
+    //       const PATH_SQUARE = new GridSquare('div');
+    //       PATH_SQUARE.setType('path');
+    //       PATH_SQUARE.gridSquareElement.style.opacity = '0';
+    //       PATH_SQUARE.gridSquareElement.style.transform = "scale(0.5)";
+    //       DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
+    //       setTimeout(() => {
+    //         PATH_SQUARE.gridSquareElement.style.opacity = '1';
+    //         PATH_SQUARE.gridSquareElement.style.transform = 'scale(1)';
+    //       }, 100);
+    //     } else if (this.grid[r][c] === "g") {
+    //       const GOAL_SQUARE = new GridSquare('div');
+    //       GOAL_SQUARE.setType('goal');
+    //       DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
+    //     } 
+    //   }
+    // }
   }
 }

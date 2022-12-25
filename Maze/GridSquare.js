@@ -1,8 +1,8 @@
 export class GridSquare {
-  constructor(element, className) {
+  constructor(element) {
     const gridSquareElement = document.createElement(element);
-    gridSquareElement.className = className;
     this.gridSquareElement = gridSquareElement;
+    this.gridSquareElement.style.transition = 'all 0.5s ease-in-out';
   }
 
   // newType is a string argument
@@ -17,6 +17,7 @@ export class GridSquare {
       this.backgroundColor = "white";
     } else if ( this.gridSquareType === "path") {
       this.backgroundColor = "orange";
+      this.gridSquareElement.classList.add('path')
     } else if ( this.gridSquareType === "goal") {
       this.backgroundColor = "blue";
     } else if ( this.gridSquareType === "start") {
