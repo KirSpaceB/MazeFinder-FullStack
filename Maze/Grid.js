@@ -10,7 +10,7 @@ export class Grid {
 
   maze() {
     let maze = [
-      ['g','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
+      ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','g'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
       ['n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
@@ -83,61 +83,44 @@ export class Grid {
     }
     console.log('goal not found');
   }
-  // instead of using dfs to append it appends after dfs is used
+  // instead of using dfs to append it appends after dfs is used(Problem)
   appendingMaze() {
     console.log(this.grid);
     const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
 
-    let counter = 0;
-    const intervalId = setInterval(() => {
-
-      if (counter >= this.grid.length) {
-        console.log(counter)
-        clearInterval(intervalId);
-        return;
-      }
-    
-      for(let r = 0; r < this.grid.length; r++) {
-        for(let c = 0; c < this.grid[r].length; c++) {
-          if(this.grid[r][c] === "s") {
-            const START_SQUARE = new GridSquare('div');
-            START_SQUARE.setType('start');
-            DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
-            counter++;
-          } else if (this.grid[r][c] === "n") {
-            const NOTHING_SQUARE = new GridSquare('div');
-            NOTHING_SQUARE.setType('nothing');
-            DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
-            counter++;
-          } else if (this.grid[r][c] === "p") {
-            const PATH_SQUARE = new GridSquare('div');
-            PATH_SQUARE.setType('path');
-            DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
-            counter++;
-          } else if (this.grid[r][c] === "g") {
-            const GOAL_SQUARE = new GridSquare('div');
-            GOAL_SQUARE.setType('goal');
-            DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
-            counter++;
-          };
+    for(let r = 0; r < this.grid.length; r++) {
+      for(let c = 0; c < this.grid[r].length; c++) {
+        if(this.grid[r][c] === "s") {
+          const START_SQUARE = new GridSquare('div');
+          START_SQUARE.setType('start');
+          DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
+        } else if(this.grid[r][c] === "n") {
+          const NOTHING_SQUARE = new GridSquare('div');
+          NOTHING_SQUARE.setType('nothing');
+          DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
+        } else if(this.grid[r][c] === "p") {
+          const PATH_SQUARE = new GridSquare('div');
+          PATH_SQUARE.setType('path');
+          DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
+        } else if(this.grid[r][c] === "g") {
+          const GOAL_SQUARE = new GridSquare('div');
+          GOAL_SQUARE.setType('goal');
+          DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
         }
       }
+    }
+    let pathCounter = 0;
+    const intervalID = setInterval(() => {
+      const paths = document.querySelectorAll('.path');
 
-      let pathCounter = 0;
-      const pathSquares = document.querySelectorAll('.path');
-      const animatePathSquare = () => {
-        if (pathCounter >= pathSquares.length) {
-          return;
-        }
-        pathSquares[pathCounter].style.transform = "scale(0.5)";//shrinks square
-        setTimeout(() => {
-          pathSquares[pathCounter].style.backgroundColor = "pink"; // while the square is shrunk transform it to pink
-          pathSquares[pathCounter].style.transform = "scale(1)"; // go back to normal size
-          pathCounter++;
-          animatePathSquare();
-        }, 400);
-      };
-      animatePathSquare();
-    }, 10);  // interval of 100ms
+      paths[pathCounter].style.backgroundColor = 'blue';
+      paths[pathCounter].style.transform = 'scale(0.5)';
+      pathCounter++
+      if(pathCounter > 239) {
+        clearInterval(intervalID)
+      }
+
+
+    },1000)
   }
 }
