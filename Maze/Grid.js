@@ -100,7 +100,7 @@ export class Grid {
       reject('Goal not found')
     });
 
-    createNewGrid.then(() => {
+    createNewGrid.then(async () => {
       // Gets the DIV_WRAPPER element from the DOM to store GridSquare objects
       const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
       // Creates UI on DOM of the Grid
@@ -117,24 +117,13 @@ export class Grid {
             DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement)
           } else if(this.grid[r][c] === "w") {
             const WALL_SQUARE = new GridSquare('div');
-            WALL_SQUARE.setType('nothing');
+            WALL_SQUARE.setType('wall');
             DIV_WRAPPER.appendChild(WALL_SQUARE.gridSquareElement)
           } else if(this.grid[r][c] === "p") {
+            await new Promise((resolve) => {setInterval(resolve, 1000)})
             const PATH_SQUARE = new GridSquare('div');
-            // Create an animation when calling the setType method
-            // Figure out a way to add setType to each individual html element
-            //rn its iterating through the maze and THEN calling the setType method
-            DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement)
-            let paths = []
-            paths.push(PATH_SQUARE);
-            // let counter = 0;
-            // setInterval(() => {
-            //   paths[counter].setType('path')
-            //   counter++
-            //   if(counter > 150) {
-            //     clearInterval()
-            //   }
-            // },1000)
+            DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
+            PATH_SQUARE.setType('path');
           } else if(this.grid[r][c] === "g") {
             const GOAL_SQUARE = new GridSquare('div');
             GOAL_SQUARE.setType('goal');
