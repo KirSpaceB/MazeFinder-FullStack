@@ -27,5 +27,4 @@ export class GridSquare {
     }
     this.gridSquareElement.style.backgroundColor = this.backgroundColor;
   }
-
 }

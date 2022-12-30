@@ -8,133 +8,147 @@ export class Grid {
   }
 
   maze() {
-    // create GridSquare objects to occupy the maze
-    const s = new GridSquare('div', 'START_SQUARE');
-    const n = new GridSquare('div', 'NOTHING_SQUARE');
-    const p = new GridSquare('div', 'PATH_SQUARE');
-    const g = new GridSquare('div', 'GOAL_SQUARE');
-    // setting GridSquare object types
-    s.setType('start');
-    n.setType('nothing');
-    p.setType('path');
-    g.setType('goal');
-
-    this.s = s;
-    this.n = n;
-    this.p = p;
-    this.g = g;
-    
-    let maze = [
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,g],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
-      [s,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n],
+    let maze = 
+    [
+      ["n","w","n","n","n","w","n","n","n","w","n","n","n","w","n","g"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","w","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","w"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","w","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","w"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","w","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","w"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","n","n"],
+      ["n","w","n","w","n","w","n","w","n","w","n","w","n","w","w","n"],
+      ["s","n","n","w","n","n","n","w","n","n","n","w","n","n","n","n"],
     ];
     this.grid = maze;
   }
 
   dfsImplementation() {
-    let startRow = 0;
-    let startCol = 0;
-    // get the divwrapper DOM element
-    const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
+    // Create a promise that changes all the n strings using dfs to p then append to DIV_WRAPPER the p strings as GridSquare objects
+    const createNewGrid = new Promise((resolve,reject) => {
 
-    // marks the starting point
-    for (let r = 0; r < this.grid.length; r++) {
-      for(let c = 0; c < this.grid[r].length; c++) {
-        if(this.grid[r][c] === this.s) {
-          startRow = r;
-          startCol = c;
-          break;
-        }
-      }
-    }
+      // Pointers to coordinates
+      let startRow = 0;
+      let startCol = 0;
 
-    // this is what makes it dfs
-    const stack = [[startRow,startCol]];
-
-    const visited = new Set();
-
-    while(stack.length > 0) {
-      // output sequence and current node
-      const [row,col] = stack.pop();
-      // marks visited
-      visited.add(`${row},${col}`);
-      // condition to determine if goal exist
-      if (this.grid[row][col] === this.g) {
-        console.log('goal found');
-        return true
-      }
-
-      if(this.grid[row][col] === this.n) {
-        this.grid[row][col] = this.p;
-      }
-      
-      // create a conditional that appends GridSquare elements on the grid based on strings on the grid
-      // Double for loop that iterates through the 2D array and appends to div wrapper the element on the index.
-      this.grid.forEach((row) => {
-        row.forEach((col) => {
-          if(col === this.s) {
-            DIV_WRAPPER.appendChild(this.s.gridSquareElement)
-          } else if (col === this.p) {
-            DIV_WRAPPER.appendChild(this.p.gridSquareElement)
+      // Marks starting point
+      for (let r = 0; r < this.grid.length; r++) {
+        for(let c = 0; c < this.grid[r].length; c++) {
+          if(this.grid[r][c] === "s") {
+            startRow = r;
+            startCol = c;
+            break;
           }
-        })
-      })
-
-      // checks neighbors
-      for(const [dRow, dCol] of [[-1,0],[1,0],[0,-1],[0,1]]) {
-        const newRow = row + dRow;
-        const newCol = col + dCol;
-        // marks the bounderies of the grid and checks for new nodes to visit
-        const isValidRow = newRow >= 0 && newRow < this.grid.length ;
-        const isValidCol = newCol >= 0 && newCol < this.grid[0].length;
-        const isNotVisited = !visited.has(`${newRow},${newCol}`);
-        if (isValidRow && isValidCol && isNotVisited) {
-          stack.push([newRow,newCol]);
-          // console.log(`Exploring node at row ${newRow}, column ${newCol}`);
         }
-      }
-    }
-    console.log('goal not found');
-  }
+      };
+
+      // Stores pointer to current coordinate
+      const stack = [[startRow,startCol]];
+
+      // Marks node as visited so DFS cannot search the same spot again
+      const visited = new Set();
+      
+      // DFS Search
+      while(stack.length > 0) {
+
+        // output sequence and current node
+        const [row,col] = stack.pop();
+  
+        // marks visited
+        visited.add(`${row},${col}`);
+
+        // Resolve the promise once goal is found
+        if(this.grid[row][col] === "g") {
+          resolve();
+          return;
+        }
+  
+        // condition to determine if goal exist
+        if(this.grid[row][col] === "n") {
+          this.grid[row][col] = "p"
+        }
+
+        // checks neighbors
+        for(const [dRow, dCol] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+          const newRow = row + dRow;
+          const newCol = col + dCol;
+          // marks the bounderies of the grid and checks for new nodes to visit
+          const isValidRow = newRow >= 0 && newRow < this.grid.length;
+          const isValidCol = newCol >= 0 && newCol < this.grid[0].length;
+          const isNotVisited = !visited.has(`${newRow},${newCol}`);
+  
+          if (isValidRow && isValidCol && isNotVisited) {
+
+            // Avoid walls in the dfs
+            if(this.grid[newRow][newCol] === "w") {
+              continue;
+            };
+            
+            // Updates the stack with the coordinates searched
+            stack.push([newRow,newCol]);
+            console.log(`Exploring node at row ${newRow}, column ${newCol}`);
+          }
+        }
+      };
+      reject('Goal not found')
+    });
+
+    createNewGrid.then(() => {
+      // Gets the DIV_WRAPPER element from the DOM to store GridSquare objects
+      const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
+      // Creates UI on DOM of the Grid
+      for(let r = 0; r < this.grid.length; r++) {
+        for(let c = 0; c < this.grid[r].length; c++) {
+          // Conditional that appends a GridSquare object on the DOM depending on the coordinates in the r and c values
+          if(this.grid[r][c] === "s") {
+            const START_SQUARE = new GridSquare('div');
+            START_SQUARE.setType('start');
+            DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
+          } else if(this.grid[r][c] === "n") {
+            const NOTHING_SQUARE = new GridSquare('div');
+            NOTHING_SQUARE.setType('nothing');
+            DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement)
+          } else if(this.grid[r][c] === "w") {
+            const WALL_SQUARE = new GridSquare('div');
+            WALL_SQUARE.setType('nothing');
+            DIV_WRAPPER.appendChild(WALL_SQUARE.gridSquareElement)
+          } else if(this.grid[r][c] === "p") {
+            const PATH_SQUARE = new GridSquare('div');
+            // Create an animation when calling the setType method
+            // Figure out a way to add setType to each individual html element
+            //rn its iterating through the maze and THEN calling the setType method
+            DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement)
+            let paths = []
+            paths.push(PATH_SQUARE);
+            // let counter = 0;
+            // setInterval(() => {
+            //   paths[counter].setType('path')
+            //   counter++
+            //   if(counter > 150) {
+            //     clearInterval()
+            //   }
+            // },1000)
+          } else if(this.grid[r][c] === "g") {
+            const GOAL_SQUARE = new GridSquare('div');
+            GOAL_SQUARE.setType('goal');
+            DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement)
+          }
+        }
+      };
+    }).catch((error) => {
+      console.log(error)
+    })
+  };
+
   // instead of using dfs to append it appends after dfs is used(Problem)
   appendingMaze() {
-    const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
-
-    for(let r = 0; r < this.grid.length; r++) {
-      for(let c = 0; c < this.grid[r].length; c++) {
-        if(this.grid[r][c] === "s") {
-          const START_SQUARE = new GridSquare('div');
-          START_SQUARE.setType('start');
-          DIV_WRAPPER.appendChild(START_SQUARE.gridSquareElement);
-        } else if(this.grid[r][c] === "n") {
-          const NOTHING_SQUARE = new GridSquare('div');
-          NOTHING_SQUARE.setType('nothing');
-          DIV_WRAPPER.appendChild(NOTHING_SQUARE.gridSquareElement);
-        } else if(this.grid[r][c] === "p") {
-          const PATH_SQUARE = new GridSquare('div');
-          PATH_SQUARE.setType('path');
-          DIV_WRAPPER.appendChild(PATH_SQUARE.gridSquareElement);
-        } else if(this.grid[r][c] === "g") {
-          const GOAL_SQUARE = new GridSquare('div');
-          GOAL_SQUARE.setType('goal');
-          DIV_WRAPPER.appendChild(GOAL_SQUARE.gridSquareElement);
-        }
-      }
-    }
     let pathCounter = 0;
     const intervalID = setInterval(() => {
       const paths = document.querySelectorAll('.path');
@@ -145,8 +159,6 @@ export class Grid {
       if(pathCounter > 239) {
         clearInterval(intervalID)
       }
-
-
     },1000)
   }
 }
