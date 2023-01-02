@@ -12,7 +12,7 @@ export class SolveButton {
     const CARET = new ElementUI('div','class','caret', '');
 
     const UL = new ElementUI('ul','class','menu', '');
-    let liDFS = new ElementUI('li', undefined,undefined,'DFS');
+    let liDFS = new ElementUI('li', 'class','DFSAlgo','DFS');
     let liBFS = new ElementUI('li', undefined,undefined,'BFS');
     let liDijkstras = new ElementUI('li', undefined,undefined,'Dijkstras');
     let liAStar = new ElementUI('li', undefined,undefined,'AStar');
@@ -60,7 +60,6 @@ export class SolveButton {
           });
           
           option.classList.add('active');
-          
         });
       });
     });

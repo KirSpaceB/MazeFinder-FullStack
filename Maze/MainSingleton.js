@@ -1,6 +1,7 @@
 import { NavBar } from "./NavBar.js";
 import { Grid } from "./Grid.js";
 import { MazeDivWrapper } from "./MazeDivWrapper.js";
+import { ActiveDfsAlgo } from "./ActivateDfsAlgo.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -8,6 +9,7 @@ export class MainSingleton {
       this.NavBar = new NavBar();
       this.MazeDivWrapper = new MazeDivWrapper();
       this.Grid = new Grid();
+      this.ActiveDfsAlgo = new ActiveDfsAlgo();
     }
     return MainSingleton.instance;
   }
