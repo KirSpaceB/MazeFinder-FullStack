@@ -30,58 +30,88 @@ export class Grid {
   }
   
   createMaze(size) {
+    // Determines the size of the grid
+    let slider = document.getElementById('slider');
+    size = slider.value;
+
     const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
     DIV_WRAPPER.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     DIV_WRAPPER.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+    
   
     // Remove all child elements from DIV_WRAPPER
     while (DIV_WRAPPER.firstChild) {
       DIV_WRAPPER.removeChild(DIV_WRAPPER.firstChild);
     }
-  
-    // Draw the maze
-    for (let i = 0; i < size * size; i++) {
-      let grid = document.createElement('div');
-      grid.style.backgroundColor = 'white';
-      DIV_WRAPPER.insertAdjacentElement('beforeend', grid);
-    };
-    this.startAndGoalLogic()
-  }
-  // Remember we have to move the slider in order to change the backgroundColor
-  startAndGoalLogic() {
-    let start;
-    let goal;
-    // create a check that returns true once start and goal are on the grid
-    let checkStart = false;
-    let checkGoal = false;
-    // Get the DIV_WRAPPER children
-    const childElements = document.getElementById('DIV_WRAPPER').children;
-    // Convert child elements to an array
-    const childElementsArray = Array.from(childElements);
 
-    console.log(childElementsArray[53])
-    let counterForStart = 1
-    let counterForGoal = 1;
-    childElementsArray.forEach(e => {
-      e.addEventListener('click', () => {
-        // Check if the background color is already red
-        if(counterForStart <= 1 && checkStart === false) {
-          e.style.backgroundColor = 'red';
-          e.dataset.value = 's';
-          start = e;
-          counterForStart++
-          checkStart = true;
-        } else if(counterForGoal <= 1 && checkGoal === false) {
-          e.style.backgroundColor = 'blue';
-          e.dataset.value = 'g';
-          goal = e;
-          counterForGoal++;
-          checkGoal = true;
-        }
+    // Represents the grid in a 2D array
+    this.maze = []
+    // Stores the created divs data
+    this.grid;
 
-      })
-    });
+    for (let row = 0; row < size; row++) {
+      this.maze.push([]);
+      for (let col = 0; col < size; col++) {
+        this.grid = document.createElement('div');
+        this.grid.style.backgroundColor = 'white';
+        DIV_WRAPPER.append(this.grid);
+        this.maze[row].push(this.grid);
+      }
+    }
+
+    
+    this.startAndGoalLogic(this.maze)
   };
 
+  async startAndGoalLogic(maze) {
+    // Initialize variables for the start point and goal point
+    let start;
+    let goal;
 
+    // Initialize variables that represent the coordinates of starting position and goal position
+    let startRow;
+    let startCol;
+    let goalRow;
+    let goalCol;
+    // Create limits
+    let startLimit = false;
+    let goalLimit = false;
+
+    // Initialize a false variable that will turn true once dfs is done searching the grid
+    let goalReached = true;
+
+    // Initialize stack for dfs
+    let dfsStack = [];
+
+    // Check visited nodes
+    let visited = new Set();
+    console.log(maze)
+    // Draw the starting points on the Grid UI
+    for(let r = 0; r < maze.length; r++) {
+      for(let c = 0; c < maze.length; c++) {
+        // Draw the starting points and goal points on the Grid UI
+        maze[r][c].addEventListener('click', () => {
+          if(startLimit === false) {
+            start = maze[r][c]
+            startRow = r;
+            startCol = c;
+            console.log('Start point:', startRow, startCol)
+            start.style.backgroundColor = 'red'
+            startLimit = true
+          } else if (goalLimit === false) {
+            goal = maze[r][c];
+            goalRow = r;
+            goalCol = c;
+            console.log('Goal point:', goalRow, goalCol)
+            goal.style.backgroundColor = "blue";
+            goalLimit = true;
+          }
+        });
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+      }
+    }
+  };
 }
+
+
