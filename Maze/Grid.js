@@ -1,66 +1,48 @@
-import { GridSquare } from "./GridSquare.js";
-
-
 export class Grid {
   constructor() {
-    this.changeSize();
     this.createMaze();
   }
-
-  changeSize() {
-    // Create the slider and UI element
-    const slider = document.createElement('input');
-    slider.type = "range";
-    slider.min = "4";
-    slider.max = "36";
-    slider.id = "slider";
-    const p = document.createElement('p');
-    const inputValue = document.createElement('span');
-    inputValue.textContent = slider.value;
   
-    // Update the UI element and call createMaze when the slider value changes
-    slider.addEventListener('input', () => {
-      inputValue.textContent = slider.value;
-      this.createMaze(slider.value);
-    });
-  
-    p.appendChild(inputValue);
-    document.body.appendChild(p);
-    document.body.appendChild(slider);
-  }
-  
-  createMaze(size) {
-    // Determines the size of the grid
+  async createMaze() {
+    // Slider value
+    let size;
     let slider = document.getElementById('slider');
-    size = slider.value;
+    
+    // Dynamically change the slider value, has a problem that it can only be used once
+    await new Promise((resolve) => {
+      slider.addEventListener('input', () => {
+        size = slider.value;
+        resolve();
+      });
+    });
+    
 
     const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
     DIV_WRAPPER.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     DIV_WRAPPER.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-    
   
     // Remove all child elements from DIV_WRAPPER
     while (DIV_WRAPPER.firstChild) {
       DIV_WRAPPER.removeChild(DIV_WRAPPER.firstChild);
     }
-
-    // Represents the grid in a 2D array
+  
+    // Outer array
     this.maze = []
     // Stores the created divs data
     this.grid;
-
+    // Creates the 2D array depends on the slider value
     for (let row = 0; row < size; row++) {
+      // inner array
       this.maze.push([]);
       for (let col = 0; col < size; col++) {
         this.grid = document.createElement('div');
         this.grid.style.backgroundColor = 'white';
         DIV_WRAPPER.append(this.grid);
+        // elements pushed to the inner Array
         this.maze[row].push(this.grid);
       }
     }
-
-    
-    this.startAndGoalLogic(this.maze)
+    return this.maze
   };
 
   async startAndGoalLogic(maze) {
@@ -115,8 +97,10 @@ export class Grid {
         continue;
       }
       visited.add(`${r},${c}`);
+
       await new Promise(resolve => setTimeout(resolve, 10));
       maze[r][c].style.backgroundColor = 'orange';
+      
       // Check if the cells above, right, below, and left of the current cell are valid and not visited
       if (r > 0 && maze[r - 1][c] != 'wall' && !visited.has(`${r - 1},${c}`)) {
         stack.push([r - 1, c]); // up
