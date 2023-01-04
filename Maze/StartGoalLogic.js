@@ -36,6 +36,7 @@ export class StartGoalLogic {
               startCol = c;
               console.log('Start point:', startRow, startCol);
               start.style.backgroundColor = 'red';
+              start.classList.add('startNode')
               startLimit = true;
             } else if (!goalLimit) {
               goal = maze[r][c];
@@ -43,6 +44,7 @@ export class StartGoalLogic {
               goalCol = c;
               console.log('Goal point:', goalRow, goalCol);
               goal.style.backgroundColor = 'blue';
+              goal.classList.add('goalNode')
               goalLimit = true;
             }
           });

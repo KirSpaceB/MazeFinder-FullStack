@@ -112,3 +112,10 @@ body {
   opacity: 1;
 }
 /*end*/
+
+/* Toggle AddWall */
+
+.addWallClick {
+  border: 2px #26489a solid;
+  box-shadow: 0 0 0.8em #26489a;
+}

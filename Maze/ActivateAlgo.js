@@ -1,12 +1,21 @@
 import { DFS } from "./DFS.js"
-      // We know this is working. We want to call a Dfs function after Start and Goal has been set
-      // We wanna do something like if start and goal = true, you can call dfs
+import { BFS } from "./BFS.js";
+import { AStar } from "./Astar.js";
 export class ActivateAlgo {
   constructor() {
-    this.dfs()
+    this.dfs();
+
   }
 
   dfs() {
     let dfsFile = new DFS();
+  }
+  
+  bfs() {
+    let bfsFile = new BFS()
+  }
+
+  astar() {
+    let aStarFile = new AStar()
   }
 }

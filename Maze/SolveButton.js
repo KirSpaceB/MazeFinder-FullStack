@@ -13,9 +13,9 @@ export class SolveButton {
 
     const UL = new ElementUI('ul','class','menu', '');
     let liDFS = new ElementUI('li', 'class','DFSAlgo','DFS');
-    let liBFS = new ElementUI('li', undefined,undefined,'BFS');
-    let liDijkstras = new ElementUI('li', undefined,undefined,'Dijkstras');
-    let liAStar = new ElementUI('li', undefined,undefined,'AStar');
+    let liBFS = new ElementUI('li', 'class','BFSAlgo','BFS');
+    let liDijkstras = new ElementUI('li', 'class','DikjstrasAlgo','Dijkstras');
+    let liAStar = new ElementUI('li', 'class','AStar','AStar');
 
     DROP_DOWN.ELEMENT.appendChild(SELECT.ELEMENT);
     SELECT.ELEMENT.appendChild(SELECTED.ELEMENT);
