@@ -55,7 +55,8 @@ export class StartGoalLogic {
     while (!startLimit || !goalLimit) {
       // Wait for startLimit and goalLimit to be true
       await new Promise((resolve) => setTimeout(resolve, 0));
-    }
+    };
+    console.log('Promise Resolved')
     // returns a maze with the start point and ending point
     return maze;
   }

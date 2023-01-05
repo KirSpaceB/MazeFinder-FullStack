@@ -13,8 +13,9 @@ export class MainSingleton {
       this.Slider = new Slider();
       this.Grid = new Grid();
       // Why is it when this.ActiveAlgo is present we cant use the object AddWall();
-      this.AddWall = new AddWall();
       this.ActivateAlgo = new ActivateAlgo();
+      this.AddWall = new AddWall();
+
     }
     return MainSingleton.instance;
   }
