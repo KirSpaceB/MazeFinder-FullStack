@@ -7,18 +7,18 @@ export class StartGoalLogic {
   async setStartAndGoal() {
     // Initialize the Grid object which is an empty object
     const grid = new Grid();
-    // We use a variable to set a pointer that waits for grid.createMaze() to initialize
+    // We use a variable to set a pointer that waits for grid.createMaze() to initialize, DIV_WRAPPER then has childElements
     const maze = await grid.createMaze();
 
     // Points to all possible coordinates on the maze
     let start,goal;
     // Points to the row and col coordinates of the maze
     let startRow, startCol, goalRow, goalCol;
-    // Limits the possibility of one variable
+    // Limits the possibility of more than one variable
     let startLimit = false;
     let goalLimit = false;
-    // Creates a Promise that resolves once the DIV_WRAPPER has children elements.
-    // We need this because the grid.createMaze(); method creates the grid
+
+    // This checks if a createMaze() worked
     const waitDivWrapperValue = new Promise((resolve) => {
       const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
       if(DIV_WRAPPER.childElementCount > 0) {
@@ -58,6 +58,7 @@ export class StartGoalLogic {
     };
     console.log('Promise Resolved')
     // returns a maze with the start point and ending point
+    console.log(maze)
     return maze;
   }
   

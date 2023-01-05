@@ -4,7 +4,6 @@ import { AStar } from "./Astar.js";
 export class ActivateAlgo {
   constructor() {
     this.dfs();
-
   }
 
   dfs() {

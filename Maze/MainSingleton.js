@@ -3,7 +3,8 @@ import { Grid } from "./Grid.js";
 import { MazeDivWrapper } from "./MazeDivWrapper.js";
 import { ActivateAlgo } from "./ActivateAlgo.js";
 import { Slider } from "./Slider.js";
-import { AddWall } from "./AddWall.js";
+import { AddWallUI } from "./AddWallUI.js";
+
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -13,8 +14,8 @@ export class MainSingleton {
       this.Slider = new Slider();
       this.Grid = new Grid();
       // Why is it when this.ActiveAlgo is present we cant use the object AddWall();
+      this.AddWallUI = new AddWallUI();
       this.ActivateAlgo = new ActivateAlgo();
-      this.AddWall = new AddWall();
 
     }
     return MainSingleton.instance;

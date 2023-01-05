@@ -1,13 +1,14 @@
-import { StartGoalLogic } from "./StartGoalLogic.js";
-
+import { AddWallLogic } from "./AddWallLogic.js";
 export class DFS {
   constructor() {
     this.algorithm();
   }
   async algorithm() {
-    let grid = new StartGoalLogic(); // this returns a 2D array
+    // Instantiate Wall
+    let gridWithStartLogicAndWallLogic = new AddWallLogic(); // this returns a 2D array
 
-    const maze = await grid.setStartAndGoal();
+    const maze = await gridWithStartLogicAndWallLogic.logic();
+    console.log(maze)
     // Variables that points to the location of the starting, and ending DIVS in the maze
     let startRow,startCol;
     let goalRow,goalCol;
@@ -32,7 +33,6 @@ export class DFS {
     // Let dfsButton to be clicked before calling this helper method
     const dfsButton = document.querySelector('.DFSAlgo');
     dfsButton.addEventListener('click', () => {
-      console.log('test')
       this.dfs(maze,startRow,startCol, goalRow, goalCol);
     })
   }
@@ -61,19 +61,19 @@ export class DFS {
 
       // mark the current cell as visited and add it to the set
       visited.add(`${row},${col}`);
-
        // explore the 4 directions (up, right, down, left)
-      if (row > 0 && maze[row-1][col] !== 'wall' && !visited.has(`${row-1},${col}`)) {
-        stack.push([row-1, col]);
+       // Dfs works but we haveto figure out how to check for walls
+      if (row > 0 && !maze[row-1][col].classList.contains('Wall') && !visited.has(`${row-1},${col}`)) {
+        stack.push([row - 1, col]);
       }
-      if (col < maze[row].length-1 && maze[row][col+1] !== 'wall' && !visited.has(`${row},${col+1}`)) {
-        stack.push([row, col+1]);
+      if (col < maze[row].length - 1 && !maze[row][col + 1].classList.contains('Wall') && !visited.has(`${row},${col+1}`)) {
+        stack.push([row, col + 1]);
       }
-      if (row < maze.length-1 && maze[row+1][col] !== 'wall' && !visited.has(`${row+1},${col}`)) {
-        stack.push([row+1, col]);
+      if (row < maze.length - 1 && !maze[row + 1][col].classList.contains('Wall') && !visited.has(`${row+1},${col}`)) {
+        stack.push([row + 1, col]);
       }
-      if (col > 0 && maze[row][col-1] !== 'wall' && !visited.has(`${row},${col-1}`)) {
-        stack.push([row, col-1]);
+      if (col > 0 && !maze[row][col - 1].classList.contains('Wall') && !visited.has(`${row},${col-1}`)) {
+        stack.push([row, col - 1]);
       }
     }
     
