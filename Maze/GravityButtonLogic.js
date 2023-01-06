@@ -1,6 +1,4 @@
 import { DFS } from "./DFS.js";
-import { AddWallLogic } from "./AddWallLogic.js";
-
 export class GravityButtonLogic {
   constructor() {
     this.logic()

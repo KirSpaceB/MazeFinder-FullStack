@@ -12,12 +12,12 @@ export class SortButton {
     const caret = new ElementUI('div','class','caret', '');
 
     const menu = new ElementUI('ul','class','menu', '');
-    const INSERTION_SORT = new ElementUI('li',undefined,undefined,'Intersection Sort');
-    const SELECTION_SORT = new ElementUI('li',undefined,undefined,'Selection Sort');
-    const BUBBLE_SORT = new ElementUI('li',undefined,undefined,'Selection Sort');
-    const MERGE_SORT = new ElementUI('li',undefined,undefined,'Merge Sort');
-    const QUICK_SORT = new ElementUI('li', undefined,undefined, 'Quick Sort');
-    const RADIX_SORT = new ElementUI('li',undefined,undefined,'Radix Sort');
+    const INSERTION_SORT = new ElementUI('li','class','InsertionSort','Intersection Sort');
+    const SELECTION_SORT = new ElementUI('li','class','SelectionSort','Selection Sort');
+    const BUBBLE_SORT = new ElementUI('li','class','BubbleSort','Bubble Sort');
+    const MERGE_SORT = new ElementUI('li','class','MergeSort','Merge Sort');
+    const QUICK_SORT = new ElementUI('li', 'class','QuickSort', 'Quick Sort');
+    const RADIX_SORT = new ElementUI('li','class','RadixSort','Radix Sort');
 
     DROP_DOWN.ELEMENT.appendChild(select.ELEMENT);
     select.ELEMENT.appendChild(selected.ELEMENT);

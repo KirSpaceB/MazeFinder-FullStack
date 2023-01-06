@@ -5,6 +5,7 @@ import { ActivateAlgo } from "./ActivateAlgo.js";
 import { Slider } from "./Slider.js";
 import { AddWallUI } from "./AddWallUI.js";
 import { GravityButtonLogic } from "./GravityButtonLogic.js";
+import { InsertionSortLogic } from "./InsertionSortLogic.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -17,6 +18,7 @@ export class MainSingleton {
       this.AddWallUI = new AddWallUI();
       this.ActivateAlgo = new ActivateAlgo();
       this.GravityButtonLogic = new GravityButtonLogic();
+      this.InsertionSortLogic = new InsertionSortLogic();
     }
     return MainSingleton.instance;
   }
