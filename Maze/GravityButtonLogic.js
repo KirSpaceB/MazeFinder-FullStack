@@ -20,7 +20,16 @@ export class GravityButtonLogic {
     gravityButton.addEventListener('click', () => {
       for(let r = 0; r < maze.length; r++) {
         for(let c = 0; c < maze[r].length; c++) {
-          console.log(maze[r][c]);
+          if(maze[r][c].classList.contains('Wall')) {
+            // I can tell the computer to iterate through maze if its a Wall check bottom neighbor if its a white div give it the Wall property, keep going until you reach row 0 column 0
+            while(r > 16) {
+              maze[r][c].style.backgroundColor = 'white'
+              maze[r+1][c].style.backgroundColor = 'black'
+            }
+            maze[r][c].style.backgroundColor = 'white';
+            maze[r + 1][c].style.backgroundColor = 'black';
+            
+          }
         }
       }
     })
