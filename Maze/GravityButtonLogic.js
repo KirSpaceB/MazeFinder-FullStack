@@ -11,30 +11,41 @@ export class GravityButtonLogic {
     let newDfs = new DFS();
     const maze = await newDfs.algorithm();
 
-
-
+    // Lets create variables that track r and c values in the maze
+    let row = 0;
+    let col = 0;
+    
     // First get the Gravity mode button
     let gravityButton = document.getElementById('gravityButton');
-
-    // Create Event that listens for a click, iterate through entire maze if maze has black div
-    gravityButton.addEventListener('click', () => {
-      for(let r = 0; r < maze.length; r++) {
-        for(let c = 0; c < maze[r].length; c++) {
-          if(maze[r][c].classList.contains('Wall')) {
-            // I can tell the computer to iterate through maze if its a Wall check bottom neighbor if its a white div give it the Wall property, keep going until you reach row 0 column 0
-            while(r > 16) {
-              maze[r][c].style.backgroundColor = 'white'
-              maze[r+1][c].style.backgroundColor = 'black'
+    
+    await new Promise((resolve) => {
+      gravityButton.addEventListener('click',resolve)
+    });
+    
+    for(let r = maze.length - 1; r >= 0; r--) {
+      for(let c = maze[r].length - 1; c >= 0; c--) {
+        if(maze[r][c].classList.contains('Wall')) {
+          row = r;
+          col = c;
+          
+          // Move the Wall down until it reaches the bottom of the maze
+          while(row + 1 < maze.length && !maze[row + 1][col].classList.contains('Wall')) {
+            if(maze[row][col].classList.contains('Wall')) {
+              await new Promise(resolve => setTimeout(resolve, 10));
+              maze[row][col].style.backgroundColor = 'white'; // erase current cell
+              maze[row][col].classList.remove('Wall'); // remove Wall class from current cell
+              maze[row + 1][col].style.backgroundColor = 'black'; // draw cell below
+              maze[row + 1][col].classList.add('Wall'); // add Wall class to cell below
+              row++;
+            } else if(maze[row][col].classList.contains('startNode') || maze[row][col].classList.contains('goalNode')) {
+              row++
+            } else {
+              break;
             }
-            maze[r][c].style.backgroundColor = 'white';
-            maze[r + 1][c].style.backgroundColor = 'black';
-            
           }
         }
       }
-    })
-    
-    
-
+    }
+    return maze
   }
 }
