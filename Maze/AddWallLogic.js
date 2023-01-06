@@ -5,9 +5,7 @@ export class AddWallLogic {
   }
 
   async logic() {
-    // This works but we cant use dfs anymore
-    // We can just return the maze with the walls and then run dfs
-    //put this whole thing in a seperate method
+
     let gridWithStartGoal = new StartGoalLogic(); // this returns a 2D array
     const maze = await gridWithStartGoal.setStartAndGoal();
 
@@ -22,7 +20,7 @@ export class AddWallLogic {
         setTimeout(() => {
           console.log('CallBack');
           resolve()
-        },1000)
+        },0)
 
       }
     });
@@ -49,19 +47,21 @@ export class AddWallLogic {
         console.log('on');
         for(let r = 0; r < maze.length; r++) {
           for(let c = 0; c < maze[r].length; c++) {
-            maze[r][c].addEventListener('mouseover',handleOnClick)
+            //hold mouse down effect
+            maze[r][c].addEventListener('mousedown',handleOnClick)
           }
         }
       } else {
         for(let r = 0; r < maze.length; r++) {
           for(let c = 0; c < maze[r].length; c++) {
-            maze[r][c].removeEventListener('mouseover',handleOnClick)
+            maze[r][c].removeEventListener('mousedown',handleOnClick)
           }
         }
       }
     })
     // Lets figure out how to Activate Algo after walls are placed
     // Initialize after walls are placed
+    console.log(maze)
     return maze
   }
     

@@ -7,6 +7,8 @@ export class DFS {
     // Instantiate Wall
     let gridWithStartLogicAndWallLogic = new AddWallLogic(); // this returns a 2D array
 
+    console.log(gridWithStartLogicAndWallLogic) // This is empty because the logic method does not get called until the start and goal are placed on the Grid
+
     const maze = await gridWithStartLogicAndWallLogic.logic();
     console.log(maze)
     // Variables that points to the location of the starting, and ending DIVS in the maze
@@ -32,9 +34,12 @@ export class DFS {
 
     // Let dfsButton to be clicked before calling this helper method
     const dfsButton = document.querySelector('.DFSAlgo');
+    
     dfsButton.addEventListener('click', () => {
       this.dfs(maze,startRow,startCol, goalRow, goalCol);
-    })
+    });
+    console.log(maze)
+    return maze
   }
 
   async dfs(maze,startRow,startCol, goalRow, goalCol) {
@@ -76,6 +81,5 @@ export class DFS {
         stack.push([row, col - 1]);
       }
     }
-    
   }
 }

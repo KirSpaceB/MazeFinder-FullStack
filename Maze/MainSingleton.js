@@ -4,7 +4,7 @@ import { MazeDivWrapper } from "./MazeDivWrapper.js";
 import { ActivateAlgo } from "./ActivateAlgo.js";
 import { Slider } from "./Slider.js";
 import { AddWallUI } from "./AddWallUI.js";
-
+import { GravityButtonLogic } from "./GravityButtonLogic.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -16,7 +16,7 @@ export class MainSingleton {
       // Why is it when this.ActiveAlgo is present we cant use the object AddWall();
       this.AddWallUI = new AddWallUI();
       this.ActivateAlgo = new ActivateAlgo();
-
+      this.GravityButtonLogic = new GravityButtonLogic();
     }
     return MainSingleton.instance;
   }

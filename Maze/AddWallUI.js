@@ -17,9 +17,6 @@ export class AddWallUI {
     addWallBtn.ELEMENT.style.maxHeight = '54px';
 
     // Intiantiate the Grid object which has the method createMaze();
-
-
-
   }
 
 }
