@@ -29,7 +29,7 @@ export class GravityButtonLogic {
           // Move the Wall down until it reaches the bottom of the maze
           while(row + 1 < maze.length && !maze[row + 1][col].classList.contains('Wall')) {
             if(maze[row][col].classList.contains('Wall')) {
-              await new Promise(resolve => setTimeout(resolve, 10));
+              await new Promise(resolve => setTimeout(resolve, 1));
               maze[row][col].style.backgroundColor = 'white'; // erase current cell
               maze[row][col].classList.remove('Wall'); // remove Wall class from current cell
               maze[row + 1][col].style.backgroundColor = 'black'; // draw cell below

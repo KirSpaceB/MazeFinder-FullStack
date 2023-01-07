@@ -48,13 +48,13 @@ export class AddWallLogic {
         for(let r = 0; r < maze.length; r++) {
           for(let c = 0; c < maze[r].length; c++) {
             //hold mouse down effect
-            maze[r][c].addEventListener('mousedown',handleOnClick)
+            maze[r][c].addEventListener('mouseover',handleOnClick)
           }
         }
       } else {
         for(let r = 0; r < maze.length; r++) {
           for(let c = 0; c < maze[r].length; c++) {
-            maze[r][c].removeEventListener('mousedown',handleOnClick)
+            maze[r][c].removeEventListener('mouseover',handleOnClick)
           }
         }
       }
