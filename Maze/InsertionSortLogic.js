@@ -41,16 +41,18 @@ export class InsertionSortLogic {
       console.log('First set of coordinates in not greater')
     }
   
-    console.log(firstWallCords);
-    console.log(secondWallCords);
-    console.log(maze[4][2])
     for(let i = 0; i < firstWallCords.length; i++) {
       for(let j = 0; j < firstWallCords[i].length; j++) {
-        console.log(firstWallCords[i])
-        console.log(firstWallCords[i][j]);
-        maze[firstWallCords[i][0]][firstWallCords[i][1]].style.backgroundColor = 'orange'
+        maze[firstWallCords[i][0]][firstWallCords[j][1] - 1].style.backgroundColor = 'orange'
       }
     }
+
+    for(let i = 0; i < secondWallCords.length; i++) {
+      for(let j = 0; j < secondWallCords[i].length; j++) {
+        maze[secondWallCords[i][0]][secondWallCords[j][1] + 1].style.backgroundColor = 'red'
+      }
+    }
+
   }
 }
 
