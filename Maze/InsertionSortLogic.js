@@ -17,38 +17,40 @@ export class InsertionSortLogic {
       sortButton.addEventListener('click',resolve)
     });
     
-    this.getHighestWallSquareCoordinate(maze);
-
+    this.getCoordinates(maze);
   }
 
-  async getHighestWallSquareCoordinate(maze) {
-    // Initialize an array to hold the coordinates of the Wall squares
-    let coordinates = [];
-    // Get all coordinates of Wall squares on the div
+  async getCoordinates(maze) {
+    let firstWallCords = [];
+    let secondWallCords = [];
+    // Get all coordinates of divs with class "Wall"
     for(let r = 0; r < maze.length; r++) {
-      for(let c = 0; c < maze.length; c++) {
-        if(maze[r][c].classList.contains('Wall')) {
-          coordinates.push([r,c]);
+      for(let c = 0; c < maze[r].length; c++) {
+        if(r < maze.length && c <= 0 && maze[r][c].classList.contains('Wall')) {
+          firstWallCords.push([r,c])
+        } else if(r < maze.length  && c === 1 && maze[r][c].classList.contains('Wall')) {
+          secondWallCords.push([r,c])
         }
       }
+    };
+
+
+    if(firstWallCords.length > secondWallCords.length) {
+      [firstWallCords, secondWallCords] = [secondWallCords, firstWallCords]
+    } else {
+      console.log('First set of coordinates in not greater')
     }
   
-    
-    // Insertion sort the coordinates array in ascending order based on the second element of each coordinate
-    for (let i = 1; i < coordinates.length; i++) {
-      // Check if this is read
-      console.log('test');
-      // variable 
-      let current = coordinates[i];
-      let j = i - 1;
-      while (j >= 0 && coordinates[j][1] > current[1]) {
-        coordinates[j + 1] = coordinates[j];
-        j--;
+    console.log(firstWallCords);
+    console.log(secondWallCords);
+    console.log(maze[4][2])
+    for(let i = 0; i < firstWallCords.length; i++) {
+      for(let j = 0; j < firstWallCords[i].length; j++) {
+        console.log(firstWallCords[i])
+        console.log(firstWallCords[i][j]);
+        maze[firstWallCords[i][0]][firstWallCords[i][1]].style.backgroundColor = 'orange'
       }
-      coordinates[j + 1] = current;
     }
-    console.log(coordinates)
-
   }
 }
 

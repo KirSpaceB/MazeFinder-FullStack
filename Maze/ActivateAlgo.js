@@ -3,7 +3,7 @@ import { BFS } from "./BFS.js";
 import { AStar } from "./Astar.js";
 export class ActivateAlgo {
   constructor() {
-    this.dfs()
+    this.bfs()
   }
 
   dfs() {
