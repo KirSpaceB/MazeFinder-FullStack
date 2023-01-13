@@ -1,4 +1,4 @@
-import { StartGoalLogic } from "./StartGoalLogic.js";
+import { AddWallLogic } from "./AddWallLogic.js";
 
 export class BFS {
   constructor() {
@@ -6,9 +6,9 @@ export class BFS {
   }
 
   async algorithm() {
-    let grid = new StartGoalLogic(); // this returns a 2D array
+    let gridWithStartLogicAndWallLogic = new AddWallLogic(); // this returns a 2D array
 
-    const maze = await grid.setStartAndGoal();
+    const maze = await gridWithStartLogicAndWallLogic.logic();
     // Variables that points to the location of the starting, and ending DIVS in the maze
     let startRow,startCol;
     let goalRow,goalCol;
@@ -27,13 +27,6 @@ export class BFS {
         }
       }
     }
-
-    console.log(maze);
-    console.log(startRow);
-    console.log(startCol);
-    console.log(goalRow);
-    console.log(goalCol);
-
 
     // Let dfsButton to be clicked before calling this helper method
     const bfsButton = document.querySelector('.BFSAlgo');
@@ -72,7 +65,7 @@ export class BFS {
       for (let i = 0; i < 4; i++) {
         const newRow = row + rowOffsets[i];
         const newCol = col + colOffsets[i];
-        if (this.isValidMove(maze, newRow, newCol) && !visited.has(`${newRow},${newCol}`)) {
+        if (this.isValidMove(maze, newRow, newCol) && !visited.has(`${newRow},${newCol}`) && !maze[newRow][newCol].classList.contains('Wall')) {
           // Mark the position as visited and store its previous position
           await new Promise(resolve => setTimeout(resolve, 10));
           maze[row][col].style.backgroundColor = 'orange';

@@ -11,6 +11,10 @@ import { BubbleSort } from "./BubbleSortLogic.js";
 import { MergeSort } from "./MergeSortLogic.js";
 import { QuickSort } from "./QuickSortLogic.js";
 import { RadixSort } from "./RadixSortLogic.js";
+import { StartGoalLogic } from "./StartGoalLogic.js";
+import { AddWallLogic } from "./AddWallLogic.js";
+import { DFS } from "./DFS.js";
+import { BFS } from "./BFS.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -21,14 +25,11 @@ export class MainSingleton {
       this.Grid = new Grid();
       // Why is it when this.ActiveAlgo is present we cant use the object AddWall();
       this.AddWallUI = new AddWallUI();
-      this.ActivateAlgo = new ActivateAlgo();
-      this.GravityButtonLogic = new GravityButtonLogic();
-      this.InsertionSortLogic = new InsertionSortLogic();
-      this.SelectionSort = new SelectionSort();
-      this.BubbleSort = new BubbleSort();
-      this.MergeSort = new MergeSort();
-      this.QuickSort = new QuickSort();
-      this.RadixSort = new RadixSort();
+      this.StartGoalLogic = new StartGoalLogic();
+      this.AddWallLogic = new AddWallLogic();
+      this.DFS = new DFS();
+      this.BFS = new BFS();
+
     }
     return MainSingleton.instance;
   }

@@ -38,7 +38,6 @@ export class DFS {
     dfsButton.addEventListener('click', () => {
       this.dfs(maze,startRow,startCol, goalRow, goalCol);
     });
-    console.log(maze)
     return maze
   }
 
