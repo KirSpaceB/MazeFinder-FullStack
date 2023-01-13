@@ -6,6 +6,11 @@ import { Slider } from "./Slider.js";
 import { AddWallUI } from "./AddWallUI.js";
 import { GravityButtonLogic } from "./GravityButtonLogic.js";
 import { InsertionSortLogic } from "./InsertionSortLogic.js";
+import { SelectionSort } from "./SelectionSortLogic.js";
+import { BubbleSort } from "./BubbleSortLogic.js";
+import { MergeSort } from "./MergeSortLogic.js";
+import { QuickSort } from "./QuickSortLogic.js";
+import { RadixSort } from "./RadixSortLogic.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -19,6 +24,11 @@ export class MainSingleton {
       this.ActivateAlgo = new ActivateAlgo();
       this.GravityButtonLogic = new GravityButtonLogic();
       this.InsertionSortLogic = new InsertionSortLogic();
+      this.SelectionSort = new SelectionSort();
+      this.BubbleSort = new BubbleSort();
+      this.MergeSort = new MergeSort();
+      this.QuickSort = new QuickSort();
+      this.RadixSort = new RadixSort();
     }
     return MainSingleton.instance;
   }

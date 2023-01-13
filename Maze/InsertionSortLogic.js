@@ -1,20 +1,18 @@
 import { GravityButtonLogic } from "./GravityButtonLogic.js";
-
 export class InsertionSortLogic {
   constructor() {
-    this.sortLogic();
+    this.activateInsertionSort();
   }
 
-  async sortLogic() {
+  async activateInsertionSort() {
     let gridAfterGravityButtonIsClicked = new GravityButtonLogic();
 
     let maze = await gridAfterGravityButtonIsClicked.logic();
     
-    const sortButton = document.querySelector('.InsertionSort')
-    console.log(sortButton)
+    const insertionSortButton = document.querySelector('.InsertionSort')
 
     await new Promise((resolve) => {
-      sortButton.addEventListener('click',resolve)
+      insertionSortButton.addEventListener('click',resolve)
     });
     
     this.getCoordinates(maze);
@@ -47,9 +45,15 @@ export class InsertionSortLogic {
     }
 
     console.log(columnsArray)
+    let mazeContainer = document.getElementById('DIV_WRAPPER')
 
+    for(let c = 0; c < columnsArray.length; c++) {
+      for (let r = 0; r < columnsArray[c].length; r++) {
+        mazeContainer.appendChild(columnsArray[c][r]);
+      }
+    }
 
-
+    
   }
 }
 
