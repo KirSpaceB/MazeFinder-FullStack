@@ -16,6 +16,7 @@ import { AddWallLogic } from "./AddWallLogic.js";
 import { DFS } from "./DFS.js";
 import { BFS } from "./BFS.js";
 import { Dijkstras } from "./Dijkstras.js";
+import { AStar } from "./Astar.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -31,7 +32,7 @@ export class MainSingleton {
       this.DFS = new DFS();
       this.BFS = new BFS();
       this.Dijkstras = new Dijkstras();
-
+      this.Astar = new AStar();
     }
     return MainSingleton.instance;
   }
