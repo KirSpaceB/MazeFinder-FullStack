@@ -36,25 +36,24 @@ export class AStar {
     });
   }
 
-  AStar(maze, startRow, startCol, goalRow, goalCol) {
+  async AStar(maze, startRow, startCol, goalRow, goalCol) {
     // Initialize variables
     const distances = {};
     const fScore = {};
     const previous = {};
-    const unvisited = new PriorityQueue();
+    const unvisited = [];
     for (let r = 0; r < maze.length; r++) {
         for (let c = 0; c < maze[r].length; c++) {
             distances[`${r},${c}`] = Infinity;
             fScore[`${r},${c}`] = Infinity;
             previous[`${r},${c}`] = null;
-            unvisited.enqueue(`${r},${c}`, Infinity);
+            unvisited.push(`${r},${c}`);
         }
     }
 
     // set the starting point
     distances[`${startRow},${startCol}`] = 0;
     fScore[`${startRow},${startCol}`] = this.heuristic(startRow, startCol, goalRow, goalCol);
-    unvisited.enqueue(`${startRow},${startCol}`, fScore[`${startRow},${startCol}`]);
 
     // define the neighbours
     const neighbours = [
@@ -63,13 +62,19 @@ export class AStar {
         [1, 0],
         [0, 1]
     ];
-    while (!unvisited.isEmpty()) {
-      let currentNode = unvisited.dequeue().element;
+
+    while (unvisited.length > 0) {
+      // sort the unvisited array based on the fScore of each node
+      unvisited.sort((a, b) => fScore[a] - fScore[b]);
+      let currentNode = unvisited.shift();
       const [row, col] = currentNode.split(',').map(Number);
+
       // Check if we reached goal
       if (currentNode === `${goalRow}, ${goalCol}`) {
-          break;
+        break;
       }
+      await new Promise(resolve => setTimeout(resolve, 10));
+      maze[row][col].style.backgroundColor = 'orange';
       // Check neighbours
       for (const [rowDiff, colDiff] of neighbours) {
           const rowNeighbor = row + rowDiff;
@@ -84,7 +89,10 @@ export class AStar {
               previous[neighbour] = currentNode;
               // calculate fScore = gScore + h(heuristic)
               fScore[neighbour] = distances[neighbour] + this.heuristic(rowNeighbor, colNeighbor, goalRow, goalCol);
-              unvisited.enqueue(neighbour, fScore[neighbour]);
+              // add the neighbor to the unvisited array if it's not already in it
+              if (!unvisited.includes(neighbour)) {
+                unvisited.push(neighbour);
+              }
           }
         }
       }

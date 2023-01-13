@@ -33,6 +33,8 @@ export class MainSingleton {
       this.BFS = new BFS();
       this.Dijkstras = new Dijkstras();
       this.Astar = new AStar();
+      this.GravityButtonLogic = new GravityButtonLogic();
+      this.RadixSort = new RadixSort();
     }
     return MainSingleton.instance;
   }
