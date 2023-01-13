@@ -31,7 +31,6 @@ export class BFS {
     // Let dfsButton to be clicked before calling this helper method
     const bfsButton = document.querySelector('.BFSAlgo');
     bfsButton.addEventListener('click', () => {
-      console.log('bfsalgo')
       this.bfs(maze,startRow,startCol, goalRow, goalCol);
     })
   }

@@ -15,6 +15,7 @@ import { StartGoalLogic } from "./StartGoalLogic.js";
 import { AddWallLogic } from "./AddWallLogic.js";
 import { DFS } from "./DFS.js";
 import { BFS } from "./BFS.js";
+import { Dijkstras } from "./Dijkstras.js";
 export class MainSingleton {
   constructor() {
     if (!MainSingleton.instance) {
@@ -29,6 +30,7 @@ export class MainSingleton {
       this.AddWallLogic = new AddWallLogic();
       this.DFS = new DFS();
       this.BFS = new BFS();
+      this.Dijkstras = new Dijkstras();
 
     }
     return MainSingleton.instance;
