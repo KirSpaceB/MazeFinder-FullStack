@@ -1,3 +1,4 @@
+import { StartGoalLogic } from "./StartGoalLogic.js";
 export class Grid {
   constructor() {
     this.createMaze();
@@ -18,7 +19,7 @@ export class Grid {
     await new Promise((resolve) => {
       slider.addEventListener('input', () => {
         size = slider.value;
-        console.log(size)
+        
         // Creates Grid
         const DIV_WRAPPER = document.getElementById('DIV_WRAPPER');
         DIV_WRAPPER.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -46,9 +47,11 @@ export class Grid {
           }
         }
         resolve();
+        console.log(this.maze)
+        const startGoalLogic = new StartGoalLogic();
+        console.log(startGoalLogic)
       });
     });
-
     return this.maze
   };
 }

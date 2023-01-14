@@ -26,15 +26,7 @@ export class MainSingleton {
       this.Slider = new Slider();
       this.Grid = new Grid();
       // Why is it when this.ActiveAlgo is present we cant use the object AddWall();
-      this.AddWallUI = new AddWallUI();
-      this.StartGoalLogic = new StartGoalLogic();
-      this.AddWallLogic = new AddWallLogic();
-      this.DFS = new DFS();
-      this.BFS = new BFS();
-      this.Dijkstras = new Dijkstras();
-      this.Astar = new AStar();
-      this.GravityButtonLogic = new GravityButtonLogic();
-      this.RadixSort = new RadixSort();
+
     }
     return MainSingleton.instance;
   }

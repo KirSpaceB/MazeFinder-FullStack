@@ -20,7 +20,6 @@ export class DFS {
       for(let c = 0; c < maze[r].length; c++) {
 
         if(maze[r][c].classList.contains('startNode')) {
-          console.log(maze[r][c])
           startRow = r;
           startCol = c;
         } else if(maze[r][c].classList.contains('goalNode')) {
@@ -29,9 +28,6 @@ export class DFS {
         }
       }
     }
-
-    console.log(goalRow)
-
     // Let dfsButton to be clicked before calling this helper method
     const dfsButton = document.querySelector('.DFSAlgo');
     
