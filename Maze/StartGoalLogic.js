@@ -1,5 +1,7 @@
-export class StartGoalLogic {
+import { AddWallLogic } from "./AddWallLogic.js";
+export class StartGoalLogic extends AddWallLogic {
   constructor() {
+    super()
     this.setStartAndGoal();
   }
   async setStartAndGoal() {
@@ -21,30 +23,36 @@ export class StartGoalLogic {
     const maze = [];
     const sliderValue = document.getElementById('slider');
     while(divWrapperChildrenArray.length) maze.push(divWrapperChildrenArray.splice(0,sliderValue.value))
-    console.log(maze)
 
-    for(let r = 0; r < maze.length; r++) {
-      for(let c = 0; c < maze[r].length; c++) {
-        maze[r][c].addEventListener('click', () => {
-          if(startLimit === false) {
-            start = maze[r][c]
-            start.style.backgroundColor = 'red'
-            start.classList.add('startNode')
-
-            startRow = r
-            startCol = c
-            startLimit = true
-          } else if(goalLimit === false) {
-            goal = maze[r][c].style.backgroundColor = 'blue'
-            goal.classList.add('goalNode')
-            goalRow = r
-            goalCol = c
-            goalLimit = true
-          }
-        }) 
+    await new Promise((resolve) => {
+      for(let r = 0; r < maze.length; r++) {
+        for(let c = 0; c < maze[r].length; c++) {
+          maze[r][c].addEventListener('click', () => {
+            if(startLimit === false) {
+              start = maze[r][c]
+              start.style.backgroundColor = 'red'
+              start.classList.add('startNode')
+  
+              startRow = r
+              startCol = c
+              startLimit = true
+            } else if(goalLimit === false) {
+              goal = maze[r][c]
+              goal.style.backgroundColor = 'blue'
+              goal.classList.add('goalNode')
+              goalRow = r
+              goalCol = c
+              goalLimit = true
+            }
+            if(startLimit === true && goalLimit === true) {
+              resolve()
+            }
+          }) 
+        }
       }
-    }
+    });
 
+    console.log(maze)
     return maze
   }
 }

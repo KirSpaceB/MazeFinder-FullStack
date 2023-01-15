@@ -1,4 +1,5 @@
 import { StartGoalLogic } from "./StartGoalLogic.js";
+import { AddWallLogic } from "./AddWallLogic.js";
 export class Grid {
   constructor() {
     this.createMaze();
@@ -47,9 +48,8 @@ export class Grid {
           }
         }
         resolve();
-        console.log(this.maze)
         const startGoalLogic = new StartGoalLogic();
-        console.log(startGoalLogic)
+        startGoalLogic.logic()
       });
     });
     return this.maze
