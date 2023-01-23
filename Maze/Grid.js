@@ -48,10 +48,10 @@ export class Grid {
           }
         }
         resolve();
-        const startGoalLogic = new StartGoalLogic();
-        startGoalLogic.logic()
       });
     });
+    const startGoalLogic = await new StartGoalLogic();
+    const addWallLogic = new AddWallLogic();
     return this.maze
   };
 }

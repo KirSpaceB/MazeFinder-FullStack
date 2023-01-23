@@ -25,8 +25,7 @@ export class MainSingleton {
       this.MazeDivWrapper = new MazeDivWrapper();
       this.Slider = new Slider();
       this.Grid = new Grid();
-      // Why is it when this.ActiveAlgo is present we cant use the object AddWall();
-
+      this.AddWallUI = new AddWallUI();
     }
     return MainSingleton.instance;
   }

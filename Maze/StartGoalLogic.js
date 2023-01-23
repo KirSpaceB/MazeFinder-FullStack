@@ -1,9 +1,8 @@
-import { AddWallLogic } from "./AddWallLogic.js";
-export class StartGoalLogic extends AddWallLogic {
+export class StartGoalLogic {
   constructor() {
-    super()
     this.setStartAndGoal();
   }
+
   async setStartAndGoal() {
     // Points to all possible coordinates on the maze
     let start,goal;
@@ -19,10 +18,9 @@ export class StartGoalLogic extends AddWallLogic {
     let divWrapperChildrenArray = [];
     const divWrapperChildren = document.getElementById('DIV_WRAPPER').children;
     divWrapperChildrenArray = [...divWrapperChildren];
-
     const maze = [];
     const sliderValue = document.getElementById('slider');
-    while(divWrapperChildrenArray.length) maze.push(divWrapperChildrenArray.splice(0,sliderValue.value))
+    while(divWrapperChildrenArray.length) maze.push(divWrapperChildrenArray.splice(0,sliderValue.value));
 
     await new Promise((resolve) => {
       for(let r = 0; r < maze.length; r++) {
@@ -51,7 +49,6 @@ export class StartGoalLogic extends AddWallLogic {
         }
       }
     });
-
     console.log(maze)
     return maze
   }
