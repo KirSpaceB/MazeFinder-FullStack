@@ -3,6 +3,8 @@ export class StartGoalLogic {
     this.setStartAndGoal();
   }
 
+
+
   async setStartAndGoal() {
     // Points to all possible coordinates on the maze
     let start,goal;
@@ -49,7 +51,6 @@ export class StartGoalLogic {
         }
       }
     });
-    console.log(maze)
-    return maze
+    // This method returns a Promise
   }
 }

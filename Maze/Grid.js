@@ -18,7 +18,7 @@ export class Grid {
     // Dynamically change the slider value, has a problem that it can only be used once
     // How can I reset this everytime slider moves
     await new Promise((resolve) => {
-      slider.addEventListener('input', () => {
+      slider.addEventListener('input', async () => {
         size = slider.value;
         
         // Creates Grid
@@ -29,7 +29,7 @@ export class Grid {
         // Remove all child elements from DIV_WRAPPER
         while (DIV_WRAPPER.firstChild) {
           DIV_WRAPPER.removeChild(DIV_WRAPPER.firstChild);
-        }
+        };
       
         // Outer array
         this.maze = [];
@@ -47,12 +47,13 @@ export class Grid {
             this.maze[row].push(this.grid);
           }
         }
-        resolve();
+        const startGoalLogic = new StartGoalLogic().setStartAndGoal().then(() => {
+          const addWallLogic = new AddWallLogic();
+        })
+
       });
     });
-    const startGoalLogic = await new StartGoalLogic();
-    const addWallLogic = new AddWallLogic();
-    return this.maze
+    // This method returns a Promise
   };
 }
 
