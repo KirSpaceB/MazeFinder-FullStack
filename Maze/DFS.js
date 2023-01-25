@@ -1,15 +1,22 @@
-import { AddWallLogic } from "./AddWallLogic.js";
 export class DFS {
   constructor() {
     this.algorithm();
   }
   async algorithm() {
-    // Instantiate Wall
-    let gridWithStartLogicAndWallLogic = new AddWallLogic(); // this returns a 2D array
+    // We need to recreate the maze variable with the current grid
+    const divWrapperChildren = document.getElementById('DIV_WRAPPER').children;
+    const slider = document.getElementById('slider');
 
-    console.log(gridWithStartLogicAndWallLogic) // This is empty because the logic method does not get called until the start and goal are placed on the Grid
+    // turn the children to an array
+    const divChildrenArray = Array.from(divWrapperChildren);
 
-    const maze = await gridWithStartLogicAndWallLogic.logic();
+    let rows = divChildrenArray.length / slider.value;
+
+    let maze = new Array(rows);
+    for(let i = 0; i < rows; i++) {
+      maze[i] = divChildrenArray.slice(i * slider.value, (i+1) * slider.value)
+    };
+
     console.log(maze)
     // Variables that points to the location of the starting, and ending DIVS in the maze
     let startRow,startCol;

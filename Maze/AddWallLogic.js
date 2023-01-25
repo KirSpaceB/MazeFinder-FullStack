@@ -11,8 +11,6 @@ export class AddWallLogic {
     let divWrapperChildren = document.getElementById('DIV_WRAPPER').children;
     // Jave to covert divs to an array to add event listener
     let divWrapperChildrenArray = [...divWrapperChildren];
-    console.log(divWrapperChildrenArray)
-
 
     // Refactored logic for adding a wall on the grid
     let addWallHandler = (e) => {
