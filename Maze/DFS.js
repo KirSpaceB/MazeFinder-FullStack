@@ -17,7 +17,6 @@ export class DFS {
       maze[i] = divChildrenArray.slice(i * slider.value, (i+1) * slider.value)
     };
 
-    console.log(maze)
     // Variables that points to the location of the starting, and ending DIVS in the maze
     let startRow,startCol;
     let goalRow,goalCol;

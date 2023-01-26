@@ -1,24 +1,32 @@
-import { AddWallLogic } from "./AddWallLogic.js";
-
 export class BFS {
   constructor() {
     this.algorithm()
   }
 
   async algorithm() {
-    let gridWithStartLogicAndWallLogic = new AddWallLogic(); // this returns a 2D array
+    // We need to recreate the maze variable with the current grid
+    const divWrapperChildren = document.getElementById('DIV_WRAPPER').children;
+    const slider = document.getElementById('slider');
+    
+    // turn the children to an array
+    const divChildrenArray = Array.from(divWrapperChildren);
+    
+    let rows = divChildrenArray.length / slider.value;
+    
+    let maze = new Array(rows);
 
-    const maze = await gridWithStartLogicAndWallLogic.logic();
-    // Variables that points to the location of the starting, and ending DIVS in the maze
+    for(let i = 0; i < rows; i++) {
+      maze[i] = divChildrenArray.slice(i * slider.value, (i+1) * slider.value)
+    };
+
+
     let startRow,startCol;
     let goalRow,goalCol;
     
     // double for loop to traverse the maze and find where the starting and ending DIVS are.
     for(let r = 0; r < maze.length; r++) {
       for(let c = 0; c < maze[r].length; c++) {
-
         if(maze[r][c].classList.contains('startNode')) {
-          console.log(maze[r][c])
           startRow = r;
           startCol = c;
         } else if(maze[r][c].classList.contains('goalNode')) {

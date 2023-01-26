@@ -1,6 +1,9 @@
 import { StartGoalLogic } from "./StartGoalLogic.js";
 import { AddWallLogic } from "./AddWallLogic.js";
 import { DFS } from "./DFS.js";
+import { BFS } from "./BFS.js";
+import { Dijkstras } from "./Dijkstras.js";
+import { AStar } from "./Astar.js";
 export class Grid {
   constructor() {
     this.createMaze();
@@ -51,6 +54,9 @@ export class Grid {
         const startGoalLogic = new StartGoalLogic().setStartAndGoal().then(() => {
           const addWallLogic = new AddWallLogic();
           const dfs = new DFS();
+          const bfs = new BFS();
+          const Dikjstras = new Dijkstras();
+          const aStar = new AStar();
         })
 
       });
