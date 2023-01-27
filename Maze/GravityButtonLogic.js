@@ -5,9 +5,20 @@ export class GravityButtonLogic {
   }
 
   async logic() {
-    // We cant have this here because it is creating a new pointer in the memory overriding the previous pointer to the AddWallLogic
-    let newDfs = new DFS();
-    const maze = await newDfs.algorithm();
+    // We need to recreate the maze variable with the current grid
+    const divWrapperChildren = document.getElementById('DIV_WRAPPER').children;
+    const slider = document.getElementById('slider');
+    
+    // turn the children to an array
+    const divChildrenArray = Array.from(divWrapperChildren);
+    
+    let rows = divChildrenArray.length / slider.value;
+    
+    let maze = new Array(rows);
+
+    for(let i = 0; i < rows; i++) {
+      maze[i] = divChildrenArray.slice(i * slider.value, (i+1) * slider.value)
+    };
 
     // Lets create variables that track r and c values in the maze
     let row = 0;

@@ -4,6 +4,7 @@ import { DFS } from "./DFS.js";
 import { BFS } from "./BFS.js";
 import { Dijkstras } from "./Dijkstras.js";
 import { AStar } from "./Astar.js";
+import { GravityButtonLogic } from "./GravityButtonLogic.js";
 export class Grid {
   constructor() {
     this.createMaze();
@@ -57,6 +58,7 @@ export class Grid {
           const bfs = new BFS();
           const Dikjstras = new Dijkstras();
           const aStar = new AStar();
+          const GravityLogic = new GravityButtonLogic();
         })
 
       });
