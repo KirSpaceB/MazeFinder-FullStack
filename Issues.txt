@@ -1,0 +1,3 @@
+Dijkstras Does not work with a wall on the grid
+Astar continues until the whole Grid is filled
+We still have the fix the sorts

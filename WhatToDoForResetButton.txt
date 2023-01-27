@@ -1,1 +1,0 @@
-Just make the Reset button change the slider value to 36 or max on click ;p
