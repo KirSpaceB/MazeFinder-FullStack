@@ -5,21 +5,35 @@ export class InsertionSortLogic {
   }
 
   async activateInsertionSort() {
-    let gridAfterGravityButtonIsClicked = new GravityButtonLogic();
 
-    let maze = await gridAfterGravityButtonIsClicked.logic();
+    const insertionSortButton = document.querySelector('.InsertionSort');
+
+    // We need to recreate the maze variable with the current grid
+    const divWrapperChildren = document.getElementById('DIV_WRAPPER').children;
+    const slider = document.getElementById('slider');
     
-    const insertionSortButton = document.querySelector('.InsertionSort')
+    // turn the children to an array
+    const divChildrenArray = Array.from(divWrapperChildren);
+    
+    let rows = divChildrenArray.length / slider.value;
+    
+    let maze = new Array(rows);
+
+    for(let i = 0; i < rows; i++) {
+      maze[i] = divChildrenArray.slice(i * slider.value, (i+1) * slider.value)
+    };
 
     await new Promise((resolve) => {
       insertionSortButton.addEventListener('click',resolve)
     });
-    
     this.getCoordinates(maze);
   }
 
   async getCoordinates(maze) {
-    let columnsArray = [];
+
+    let towers = [];
+    let temp;
+
     for(let c = 0; c < maze[0].length; c++) {
       let arrayForCols = []
       for(let r = 0; r < maze.length; r++) {
@@ -27,33 +41,24 @@ export class InsertionSortLogic {
           arrayForCols.push(maze[r][c])
         }
       }
-      columnsArray.push(arrayForCols);
+      towers.push(arrayForCols);
     }
-    for(let i = 1; i < columnsArray.length; i++) {
+  
+
+    for(let i = 1; i < towers.length; i++) {
+      // We begin at index 1
+      let key = towers[i];
       let j = i - 1;
-      let temp = columnsArray[i];
-      while(j >= 0 && columnsArray[j].length > temp.length) {
-        columnsArray[j + 1] = columnsArray[j];
-        j--;
+
+      while(j >= 0 && towers[j] > key) {
+        towers[j+1] = towers[j];
+        j--
       }
-      columnsArray[j + 1] = temp;
+      towers[j + 1] = key
     }
 
-    let walls = document.getElementsByClassName("Wall");
-    while (walls[0]) {
-      walls[0].parentNode.removeChild(walls[0]);
-    }
-
-    console.log(columnsArray)
-    let mazeContainer = document.getElementById('DIV_WRAPPER')
-
-    for(let c = 0; c < columnsArray.length; c++) {
-      for (let r = 0; r < columnsArray[c].length; r++) {
-        mazeContainer.appendChild(columnsArray[c][r]);
-      }
-    }
-
-    
+    console.log(towers)
+    console.log(towers[0][0])
+    console.log(towers[9][2])
   }
 }
-

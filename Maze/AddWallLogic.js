@@ -23,11 +23,11 @@ export class AddWallLogic {
       
       if(wallButtonUI.classList.contains('addWallClick')) {
         divWrapperChildrenArray.forEach(e => {
-          e.addEventListener('click',addWallHandler)
+          e.addEventListener('mouseover',addWallHandler)
         });
       } else {
         divWrapperChildrenArray.forEach(e => {
-          e.removeEventListener('click', addWallHandler)
+          e.removeEventListener('mouseover', addWallHandler)
         });
       }
     })

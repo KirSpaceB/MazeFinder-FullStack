@@ -6,6 +6,7 @@ import { Dijkstras } from "./Dijkstras.js";
 import { AStar } from "./Astar.js";
 import { GravityButtonLogic } from "./GravityButtonLogic.js";
 import { ResetButtonLogic } from "./ResetButtonLogic.js";
+import { InsertionSortLogic } from "./InsertionSortLogic.js";
 export class Grid {
   constructor() {
     this.createMaze();
@@ -61,6 +62,7 @@ export class Grid {
           const aStar = new AStar();
           const GravityLogic = new GravityButtonLogic();
           const ResetLogic = new ResetButtonLogic();
+          const insertionSort = new InsertionSortLogic();
         })
 
       });

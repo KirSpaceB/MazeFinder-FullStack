@@ -12,7 +12,7 @@ export class SortButton {
     const caret = new ElementUI('div','class','caret', '');
 
     const menu = new ElementUI('ul','class','menu', '');
-    const INSERTION_SORT = new ElementUI('li','class','InsertionSort','Intersection Sort');
+    const INSERTION_SORT = new ElementUI('li','class','InsertionSort','Insertion Sort');
     const SELECTION_SORT = new ElementUI('li','class','SelectionSort','Selection Sort');
     const BUBBLE_SORT = new ElementUI('li','class','BubbleSort','Bubble Sort');
     const MERGE_SORT = new ElementUI('li','class','MergeSort','Merge Sort');
