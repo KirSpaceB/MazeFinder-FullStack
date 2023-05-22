@@ -1,6 +1,7 @@
 # MazeSolver
 
 Visually represents searching algorithms such as BFS and DFS. Obstacles such as walls can be manually implemented to further visalize the algorithms traversal.
+Written unit and integration tests for each feature are currently WIP.
 
 # How to run
 1. Clone the project from github
